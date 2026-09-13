@@ -127,33 +127,47 @@ export default function Hero() {
           ease: "sine.out",
         }
       );
-
-      gsap.to(arrowRef.current, {
-        y: 5,
-        duration: 1.6,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
     });
 
     return () => ctx.revert();
   }, []);
 
+  // Scroll cue: bounces at the bottom of the hero while at the top of the
+  // page, fades out once the user scrolls away, and reappears (bounce
+  // resumed) if they scroll back up to the hero.
   useEffect(() => {
+    let isVisible = true;
+    const bounceTween = gsap.to(arrowRef.current, {
+      y: 5,
+      duration: 1.6,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+    });
+
     function handleScroll() {
-      if (window.scrollY <= 4) return;
-      gsap.killTweensOf(arrowRef.current);
+      const shouldShow = window.scrollY <= 4;
+      if (shouldShow === isVisible) return;
+      isVisible = shouldShow;
+
       gsap.to(scrollCueRef.current, {
-        opacity: 0,
+        opacity: shouldShow ? 1 : 0,
         duration: 0.6,
         ease: "power1.out",
       });
-      window.removeEventListener("scroll", handleScroll);
+
+      if (shouldShow) {
+        bounceTween.restart();
+      } else {
+        bounceTween.pause();
+      }
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      bounceTween.kill();
+    };
   }, []);
 
   function handleTagEnter(event) {
@@ -173,11 +187,11 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative flex min-h-[600px] flex-col justify-center pt-20">
+    <section className="relative flex min-h-screen flex-col justify-center pt-20">
       <Container className="w-full">
         <span
           ref={badgeRef}
-          className="inline-flex w-fit items-center gap-2 rounded-full bg-slate-200 px-4 py-1.5 text-sm font-medium text-transparent dark:bg-slate-700"
+          className="inline-flex w-fit items-center gap-2 rounded-full bg-slate-200 px-4 py-2 text-xs font-medium tracking-wide text-transparent dark:bg-slate-700"
         >
           <span
             ref={badgeDotRef}
@@ -201,7 +215,7 @@ export default function Hero() {
 
         <p
           ref={paraRef}
-          className="mt-6 max-w-2xl text-xl leading-relaxed text-slate-400"
+          className="mt-3 max-w-2xl text-lg leading-relaxed text-slate-400"
         >
           Product Designer who designs and builds useful digital products.
         </p>
@@ -213,7 +227,7 @@ export default function Hero() {
               ref={(el) => (tagRefs.current[i] = el)}
               onMouseEnter={handleTagEnter}
               onMouseLeave={handleTagLeave}
-              className="rounded-full bg-slate-200 px-4 py-1.5 text-sm font-light text-transparent dark:bg-slate-700"
+              className="rounded-full bg-slate-200 px-4 py-2 text-xs font-light tracking-wide text-transparent dark:bg-slate-700"
             >
               {tag}
             </span>
@@ -223,7 +237,7 @@ export default function Hero() {
 
       <div
         ref={scrollCueRef}
-        className="mt-16 flex flex-col items-center gap-2 text-secondary-text dark:text-slate-400"
+        className="absolute inset-x-0 bottom-10 flex flex-col items-center gap-2 text-secondary-text dark:text-slate-400"
       >
         <span className="text-xs font-medium uppercase tracking-wide">
           Scroll

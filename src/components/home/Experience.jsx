@@ -4,19 +4,14 @@ import Container from "../layout/Container.jsx";
 
 const experience = [
   {
-    company: "[COMPANY NAME]",
-    role: "[ROLE TITLE]",
-    dates: "[YYYY] - [YYYY]",
-  },
-  {
     company: "EverTry",
-    role: "[ROLE TITLE - dual Design + PM role, wording pending]",
-    dates: "[YYYY] - [YYYY]",
+    role: "Product Designer",
+    dates: "May 2026 - Present",
   },
   {
-    company: "[COMPANY NAME]",
-    role: "[ROLE TITLE]",
-    dates: "[YYYY] - [YYYY]",
+    company: "Squama Marketing",
+    role: "UX/UI Designer (Freelance)",
+    dates: "March 2026 - Present",
   },
 ];
 

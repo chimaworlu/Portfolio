@@ -7,18 +7,21 @@ export const projects = [
     name: "UXLens AI",
     hasLiveBadge: true,
     caseStudyReady: true,
+    outcome: "Reads your research, finds the patterns, shows you exactly where.",
   },
   {
     slug: "legible",
     name: "Legible",
     hasLiveBadge: true,
     caseStudyReady: true,
+    outcome: "Turns handwritten notes into a clean, structured digital book.",
   },
   {
     slug: "servicehub",
     name: "ServiceHub",
     hasLiveBadge: false,
     caseStudyReady: false,
+    outcome: "Helping students find and book trusted home service providers.",
   },
 ];
 

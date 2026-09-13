@@ -4,7 +4,12 @@ import { gsap } from "../../lib/gsap.js";
 import Container from "./Container.jsx";
 import ThemeToggle from "../shared/ThemeToggle.jsx";
 
-const homeLinks = ["Work", "Experience", "About", "Contact"];
+const homeLinks = [
+  { label: "Work", href: "#work" },
+  { label: "Experience", href: "#experience" },
+  { label: "About", href: "#about" },
+  { label: "Contact", href: "#contact" },
+];
 const caseStudyLinks = [{ label: "Back to Work", href: "/#work" }];
 
 const ctaClass =
@@ -53,10 +58,14 @@ export default function Nav({ variant = "home" }) {
         <nav className="flex items-center gap-8">
           {isHome ? (
             <>
-              {homeLinks.map((label) => (
-                <span key={label} className={linkClass}>
-                  {label}
-                </span>
+              {homeLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className={`${linkClass} hover:text-ink dark:hover:text-white`}
+                >
+                  {link.label}
+                </a>
               ))}
               <ThemeToggle />
               <span ref={resumeRef} className={ctaClass}>

@@ -74,7 +74,7 @@ export default function ProjectCard({ project }) {
         )}
 
         <p className="text-sm text-secondary-text dark:text-slate-400">
-          [ONE-LINE PROJECT OUTCOME - PLACEHOLDER]
+          {project.outcome ?? "[ONE-LINE PROJECT OUTCOME - PLACEHOLDER]"}
         </p>
       </div>
     </div>
