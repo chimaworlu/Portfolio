@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -9,5 +9,13 @@ html {
 }
 
 body {
-  @apply bg-white text-ink font-sans antialiased;
+  @apply bg-white text-ink font-sans antialiased dark:bg-ink dark:text-white;
+}
+
+:root {
+  --grid-line: rgba(15, 23, 42, 0.06);
+}
+
+.dark {
+  --grid-line: rgba(255, 255, 255, 0.06);
 }
