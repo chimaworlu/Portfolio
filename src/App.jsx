@@ -4,6 +4,9 @@ import { ThemeProvider } from "./context/ThemeContext.jsx";
 import HomePage from "./pages/HomePage.jsx";
 
 const CaseStudyPage = lazy(() => import("./pages/CaseStudyPage.jsx"));
+const ServiceHubCaseStudy = lazy(() =>
+  import("./pages/ServiceHubCaseStudy.jsx")
+);
 
 export default function App() {
   return (
@@ -19,6 +22,7 @@ export default function App() {
             path="/work/legible"
             element={<CaseStudyPage slug="legible" />}
           />
+          <Route path="/work/servicehub" element={<ServiceHubCaseStudy />} />
         </Routes>
       </Suspense>
     </ThemeProvider>

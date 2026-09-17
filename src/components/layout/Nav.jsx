@@ -1,6 +1,4 @@
-import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { gsap } from "../../lib/gsap.js";
 import Container from "./Container.jsx";
 import ThemeToggle from "../shared/ThemeToggle.jsx";
 
@@ -18,26 +16,6 @@ const linkClass = "text-sm font-normal text-secondary-text dark:text-slate-400";
 
 export default function Nav({ variant = "home" }) {
   const isHome = variant === "home";
-  const resumeRef = useRef(null);
-
-  // Soft pulsing glow to draw attention to the primary CTA.
-  useEffect(() => {
-    if (!resumeRef.current) return;
-
-    const tween = gsap.fromTo(
-      resumeRef.current,
-      { boxShadow: "0 0 0px 0px rgba(37, 99, 235, 0.45)" },
-      {
-        boxShadow: "0 0 18px 4px rgba(37, 99, 235, 0.45)",
-        duration: 1.6,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      }
-    );
-
-    return () => tween.kill();
-  }, []);
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 h-20 bg-white dark:bg-ink">
@@ -68,9 +46,7 @@ export default function Nav({ variant = "home" }) {
                 </a>
               ))}
               <ThemeToggle />
-              <span ref={resumeRef} className={ctaClass}>
-                Resume
-              </span>
+              <span className={ctaClass}>Resume</span>
             </>
           ) : (
             <>

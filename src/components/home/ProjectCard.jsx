@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 import { gsap } from "../../lib/gsap.js";
 import BrowserFrame from "../shared/BrowserFrame.jsx";
 
@@ -18,10 +19,16 @@ export default function ProjectCard({ project }) {
       });
   }
 
+  const Wrapper = project.href ? Link : "div";
+  const wrapperProps = project.href ? { to: project.href } : {};
+
   return (
-    <div
+    <Wrapper
+      {...wrapperProps}
       onMouseEnter={handlePeel}
-      className="flex flex-col items-start gap-8 sm:flex-row sm:items-center"
+      className={`flex flex-col items-start gap-8 sm:flex-row sm:items-center ${
+        project.href ? "cursor-pointer" : ""
+      }`}
     >
       <div className="relative h-[320px] w-full overflow-hidden rounded-card bg-slate-50 dark:bg-slate-800 sm:w-[70%]">
         <div className="flex h-full flex-col items-center justify-center gap-4">
@@ -77,6 +84,6 @@ export default function ProjectCard({ project }) {
           {project.outcome ?? "[ONE-LINE PROJECT OUTCOME - PLACEHOLDER]"}
         </p>
       </div>
-    </div>
+    </Wrapper>
   );
 }

@@ -1,5 +1,5 @@
 // Real, known facts only. Everything content-dependent (outcomes, copy,
-// metrics) stays out of this file until it is finalized — see the
+// metrics) stays out of this file until it is finalized, see the
 // bracketed placeholders rendered in the components instead.
 export const projects = [
   {
@@ -21,6 +21,7 @@ export const projects = [
     name: "ServiceHub",
     hasLiveBadge: false,
     caseStudyReady: false,
+    href: "/work/servicehub",
     outcome: "Helping students find and book trusted home service providers.",
   },
 ];
