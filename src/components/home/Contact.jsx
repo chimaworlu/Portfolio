@@ -55,17 +55,17 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="mt-section scroll-mt-20 bg-brand-blue-tint py-24 dark:bg-blue-500/10"
+      className="mt-20 scroll-mt-20 bg-brand-blue-tint py-16 dark:bg-blue-500/10 sm:mt-section sm:py-24"
     >
       <Container
         ref={contentRef}
         className="flex flex-col items-center gap-8 text-center"
       >
-        <div className="relative">
+        <div className="relative max-w-full">
           <a
             href={`mailto:${email}`}
             onClick={handleEmailClick}
-            className="text-2xl font-bold text-brand-blue sm:text-3xl dark:text-blue-300"
+            className="break-all text-xl font-bold text-brand-blue sm:text-2xl lg:text-3xl dark:text-blue-300"
           >
             {email}
           </a>

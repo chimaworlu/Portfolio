@@ -28,7 +28,7 @@ export default function ProjectGrid() {
   }, []);
 
   return (
-    <section id="work" className="mt-section scroll-mt-20">
+    <section id="work" className="mt-20 scroll-mt-20 sm:mt-section">
       <Container>
         <h2 className="sr-only">Work</h2>
         <div ref={listRef} className="flex flex-col gap-20">

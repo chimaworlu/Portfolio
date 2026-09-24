@@ -187,7 +187,10 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative flex min-h-screen flex-col justify-center pt-20">
+    <section
+      className="relative flex min-h-screen flex-col justify-center pt-20"
+      style={{ minHeight: "100svh" }}
+    >
       <Container className="w-full">
         <span
           ref={badgeRef}
@@ -208,7 +211,7 @@ export default function Hero() {
 
         <h1
           ref={headingRef}
-          className="mt-6 text-6xl font-normal tracking-tight text-slate-400 sm:text-7xl"
+          className="mt-6 font-normal leading-tight tracking-tight text-slate-400 text-[clamp(2.25rem,9vw,4.5rem)]"
         >
           Chima Worlu
         </h1>
@@ -237,7 +240,7 @@ export default function Hero() {
 
       <div
         ref={scrollCueRef}
-        className="absolute inset-x-0 bottom-10 flex flex-col items-center gap-2 text-secondary-text dark:text-slate-400"
+        className="pointer-events-none absolute inset-x-0 bottom-6 flex select-none flex-col items-center gap-2 text-secondary-text dark:text-slate-400 sm:bottom-10"
       >
         <span className="text-xs font-medium uppercase tracking-wide">
           Scroll

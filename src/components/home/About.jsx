@@ -25,7 +25,7 @@ export default function About() {
   }, []);
 
   return (
-    <section id="about" className="mt-section scroll-mt-20">
+    <section id="about" className="mt-20 scroll-mt-20 sm:mt-section">
       <Container>
         <h2 ref={headingRef} className="text-3xl font-bold text-ink dark:text-white">
           About
