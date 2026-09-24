@@ -1,9 +1,10 @@
-export default function BrowserFrame({ children, className = "" }) {
+export default function BrowserFrame({ children, className = "", ...rest }) {
   return (
     <div
-      className={`overflow-hidden rounded-lg border border-border bg-white ${className}`}
+      className={`overflow-hidden rounded-lg border border-border bg-white dark:border-slate-700 dark:bg-slate-900 ${className}`}
+      {...rest}
     >
-      <div className="flex items-center gap-1.5 border-b border-border px-3 py-2">
+      <div className="flex items-center gap-1.5 border-b border-border px-3 py-2 dark:border-slate-700">
         <span className="h-2 w-2 rounded-full bg-red-400" />
         <span className="h-2 w-2 rounded-full bg-yellow-400" />
         <span className="h-2 w-2 rounded-full bg-green-400" />

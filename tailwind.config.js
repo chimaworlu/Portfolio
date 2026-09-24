@@ -12,6 +12,7 @@ export default {
           "-apple-system",
           "sans-serif",
         ],
+        syne: ["Syne", "sans-serif"],
       },
       colors: {
         "brand-blue": "#2563EB",
