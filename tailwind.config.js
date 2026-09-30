@@ -13,6 +13,8 @@ export default {
           "sans-serif",
         ],
         syne: ["Syne", "sans-serif"],
+        display: ["Anton", "sans-serif"],
+        poppins: ["Poppins", "sans-serif"],
       },
       colors: {
         "brand-blue": "#2563EB",
