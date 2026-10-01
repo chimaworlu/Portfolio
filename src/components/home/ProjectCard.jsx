@@ -5,7 +5,7 @@ import { gsap } from "../../lib/gsap.js";
 export default function ProjectCard({ project, index }) {
   const imageFirst = index % 2 === 0;
   const [overlayActive, setOverlayActive] = useState(false);
-  const hasImageOverlay = Boolean(project.gridImage) && project.slug !== "servicehub";
+  const hasImageOverlay = Boolean(project.gridImage);
   const descriptionRef = useRef(null);
 
   useLayoutEffect(() => {

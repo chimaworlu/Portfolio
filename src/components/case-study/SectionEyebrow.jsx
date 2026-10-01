@@ -1,6 +1,6 @@
-export default function SectionEyebrow({ children }) {
+export default function SectionEyebrow({ children, color }) {
   return (
-    <p className="text-xs font-semibold uppercase tracking-wide text-brand-blue dark:text-blue-400">
+    <p style={{ color }} className="text-xs font-semibold uppercase tracking-wide">
       {children}
     </p>
   );

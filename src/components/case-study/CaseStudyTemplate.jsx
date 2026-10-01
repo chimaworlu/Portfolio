@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { gsap } from "../../lib/gsap.js";
 import Container from "../layout/Container.jsx";
@@ -17,6 +17,7 @@ const placeholderToolGroups = [
 
 export default function CaseStudyTemplate({
   projectName,
+  cardColor,
   positioning,
   role,
   timeline,
@@ -37,6 +38,7 @@ export default function CaseStudyTemplate({
 }) {
   const details = { Role: role, Timeline: timeline, Tools: tools };
   const mainRef = useRef(null);
+  const [lightboxImage, setLightboxImage] = useState(null);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -60,19 +62,35 @@ export default function CaseStudyTemplate({
       <Container className="pt-10">
         {/* Opener */}
         <div className="relative flex h-[420px] items-center justify-center rounded-card bg-slate-50 dark:bg-slate-800">
-          <span className="absolute right-6 top-6 rounded-full bg-brand-blue-tint px-3 py-1 text-xs font-medium text-brand-blue dark:bg-blue-500/15 dark:text-blue-300">
-            View Live ↗
+          <span
+            style={{ color: cardColor, backgroundColor: `${cardColor}1A` }}
+            className="absolute right-6 top-6 inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium"
+          >
+            View Live
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M7 17L17 7M8 7h9v9" />
+            </svg>
           </span>
           <span className="text-sm text-secondary-text dark:text-slate-400">[OPENER VIDEO]</span>
         </div>
       </Container>
 
       {/* Title block */}
-      <Container className="mt-16" data-reveal-group>
-        <h1 data-reveal className="text-5xl font-extrabold tracking-tight text-ink dark:text-white">
+      <Container className="mt-20 sm:mt-section" data-reveal-group>
+        <h1 data-reveal className="font-display text-5xl tracking-tight text-ink dark:text-white">
           {projectName}
         </h1>
-        <p data-reveal className="mt-3 text-lg text-secondary-text dark:text-slate-400">
+        <p data-reveal className="mt-6 text-lg text-secondary-text dark:text-slate-400">
           {positioning ?? "[ONE LINE POSITIONING]"}
         </p>
 
@@ -91,31 +109,34 @@ export default function CaseStudyTemplate({
       </Container>
 
       {/* Context */}
-      <Container className="mt-section" data-reveal-group>
-        <SectionEyebrow>The Problem</SectionEyebrow>
-        <h2 data-reveal className="mt-2 text-3xl font-bold text-ink dark:text-white">
+      <Container className="mt-20 sm:mt-section" data-reveal-group>
+        <SectionEyebrow color={cardColor}>The Problem</SectionEyebrow>
+        <h2 data-reveal className="mt-2 font-display text-3xl text-ink dark:text-white">
           {contextHeadline ?? "[CONTEXT HEADLINE PLACEHOLDER]"}
         </h2>
-        <p data-reveal className="mt-4 max-w-2xl text-secondary-text dark:text-slate-400">
+        <p data-reveal className="mt-6 max-w-2xl text-secondary-text dark:text-slate-400">
           {contextParagraph ?? "[CONTEXT PARAGRAPH PLACEHOLDER]"}
         </p>
       </Container>
 
       {/* Role & Ownership */}
-      <Container className="mt-16" data-reveal-group>
-        <div data-reveal className="rounded-card bg-brand-blue-tint p-8 dark:bg-blue-500/15">
-          <SectionEyebrow>Role and Ownership</SectionEyebrow>
-          <p className="mt-2 text-ink dark:text-white">
+      <Container className="mt-20 sm:mt-section" data-reveal-group>
+        <div data-reveal>
+          <SectionEyebrow color={cardColor}>Role and Ownership</SectionEyebrow>
+          <blockquote
+            style={{ borderColor: cardColor }}
+            className="mt-6 border-l-2 pl-6 text-ink dark:text-white"
+          >
             {roleOwnership ??
               `Led ${projectName} end to end, from problem to shipped product, directing AI-assisted execution throughout.`}
-          </p>
+          </blockquote>
         </div>
       </Container>
 
       {/* Key decisions */}
-      <Container className="mt-section" data-reveal-group>
-        <SectionEyebrow>Key Decisions</SectionEyebrow>
-        <h2 data-reveal className="mt-2 text-3xl font-bold text-ink dark:text-white">
+      <Container className="mt-20 sm:mt-section" data-reveal-group>
+        <SectionEyebrow color={cardColor}>Key Decisions</SectionEyebrow>
+        <h2 data-reveal className="mt-2 font-display text-3xl text-ink dark:text-white">
           {decisionsHeadline ?? "[DECISIONS HEADLINE]"}
         </h2>
 
@@ -138,9 +159,9 @@ export default function CaseStudyTemplate({
       </Container>
 
       {/* Obstacles */}
-      <Container className="mt-section" data-reveal-group>
-        <SectionEyebrow>Obstacles</SectionEyebrow>
-        <h2 data-reveal className="mt-2 text-3xl font-bold text-ink dark:text-white">
+      <Container className="mt-20 sm:mt-section" data-reveal-group>
+        <SectionEyebrow color={cardColor}>Obstacles</SectionEyebrow>
+        <h2 data-reveal className="mt-2 font-display text-3xl text-ink dark:text-white">
           {obstaclesHeadline ?? "[OBSTACLES HEADLINE]"}
         </h2>
 
@@ -164,20 +185,25 @@ export default function CaseStudyTemplate({
 
       {/* What was built */}
       {builtScreens && (
-        <Container className="mt-section" data-reveal-group>
-          <SectionEyebrow>What Was Built</SectionEyebrow>
+        <Container className="mt-20 sm:mt-section" data-reveal-group>
+          <SectionEyebrow color={cardColor}>What Was Built</SectionEyebrow>
 
           <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-3">
             {builtScreens.map((screen) => (
               <BrowserFrame key={screen.alt} data-reveal>
-                <div className="flex h-32 items-center justify-center">
+                <button
+                  type="button"
+                  onClick={() => setLightboxImage(screen)}
+                  aria-label={`View ${screen.alt} full size`}
+                  className="flex h-32 w-full cursor-pointer items-center justify-center border-0 bg-transparent p-0"
+                >
                   <img
                     src={screen.src}
                     alt={screen.alt}
                     loading="lazy"
                     className="h-full w-full object-cover object-top"
                   />
-                </div>
+                </button>
               </BrowserFrame>
             ))}
           </div>
@@ -185,8 +211,8 @@ export default function CaseStudyTemplate({
       )}
 
       {/* Tools & skills */}
-      <Container className="mt-section" data-reveal-group>
-        <SectionEyebrow>Tools and Skills</SectionEyebrow>
+      <Container className="mt-20 sm:mt-section" data-reveal-group>
+        <SectionEyebrow color={cardColor}>Tools and Skills</SectionEyebrow>
 
         <div className="mt-8 grid grid-cols-1 gap-10 sm:grid-cols-3">
           {(toolGroups ?? placeholderToolGroups).map((group) => (
@@ -208,23 +234,26 @@ export default function CaseStudyTemplate({
       </Container>
 
       {/* Outcome */}
-      <Container className="mt-16" data-reveal-group>
-        <div data-reveal className="rounded-card border border-border p-8 dark:border-slate-700">
-          <SectionEyebrow>Outcome</SectionEyebrow>
-          <p className="mt-2 text-ink dark:text-white">
+      <Container className="mt-20 sm:mt-section" data-reveal-group>
+        <div data-reveal>
+          <SectionEyebrow color={cardColor}>Outcome</SectionEyebrow>
+          <blockquote
+            style={{ borderColor: cardColor }}
+            className="mt-6 border-l-2 pl-6 text-ink dark:text-white"
+          >
             {outcomeSummary ?? "[OUTCOME PLACEHOLDER]"}
-          </p>
+          </blockquote>
         </div>
       </Container>
 
       {/* What I learned */}
-      <Container className="mt-section" data-reveal-group>
-        <SectionEyebrow>What I Learned</SectionEyebrow>
+      <Container className="mt-20 sm:mt-section" data-reveal-group>
+        <SectionEyebrow color={cardColor}>What I Learned</SectionEyebrow>
 
         <ul className="mt-6 space-y-3">
           {(learnings ?? placeholderLearnings).map((item, i) => (
             <li key={i} data-reveal className="flex items-start gap-3 text-secondary-text dark:text-slate-400">
-              <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-brand-blue dark:bg-blue-400" />
+              <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-ink dark:bg-white" />
               {learnings ? item : "[LEARNING PLACEHOLDER]"}
             </li>
           ))}
@@ -233,13 +262,13 @@ export default function CaseStudyTemplate({
 
       {/* What's next */}
       {whatsNext && (
-        <Container className="mt-section" data-reveal-group>
-          <SectionEyebrow>What's Next</SectionEyebrow>
+        <Container className="mt-20 sm:mt-section" data-reveal-group>
+          <SectionEyebrow color={cardColor}>What's Next</SectionEyebrow>
 
           <ul className="mt-6 space-y-3">
             {whatsNext.map((item, i) => (
               <li key={i} data-reveal className="flex items-start gap-3 text-secondary-text dark:text-slate-400">
-                <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-brand-blue dark:bg-blue-400" />
+                <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-ink dark:bg-white" />
                 {item}
               </li>
             ))}
@@ -248,7 +277,7 @@ export default function CaseStudyTemplate({
       )}
 
       {/* Close */}
-      <Container className="mt-section pb-24 text-center" data-reveal-group>
+      <Container className="mt-20 pb-24 text-center sm:mt-section" data-reveal-group>
         <p data-reveal className="text-xs font-medium uppercase tracking-wide text-secondary-text dark:text-slate-400">
           Next project
         </p>
@@ -256,7 +285,7 @@ export default function CaseStudyTemplate({
           <Link
             to={`/work/${nextProject.slug}`}
             data-reveal
-            className="group mt-2 inline-flex items-center gap-2 text-3xl font-bold text-ink hover:text-brand-blue dark:text-white dark:hover:text-blue-400"
+            className="group mt-2 inline-flex items-center gap-2 font-display text-3xl text-ink transition-colors duration-200 hover:text-secondary-text dark:text-white dark:hover:text-slate-400"
           >
             {nextProject.name}
             <span
@@ -267,11 +296,45 @@ export default function CaseStudyTemplate({
             </span>
           </Link>
         ) : (
-          <p data-reveal className="mt-2 text-3xl font-bold text-ink dark:text-white">
+          <p data-reveal className="mt-2 font-display text-3xl text-ink dark:text-white">
             {nextProject ? nextProject.name : "[NEXT PROJECT NAME]"}
           </p>
         )}
       </Container>
+
+      {lightboxImage && (
+        <div
+          onClick={() => setLightboxImage(null)}
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 p-6"
+        >
+          <button
+            type="button"
+            onClick={() => setLightboxImage(null)}
+            aria-label="Close"
+            className="absolute right-6 top-6 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors duration-200 hover:bg-white/20"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M6 6l12 12M18 6L6 18" />
+            </svg>
+          </button>
+          <img
+            src={lightboxImage.src}
+            alt={lightboxImage.alt}
+            onClick={(event) => event.stopPropagation()}
+            className="max-h-full max-w-full rounded-lg object-contain"
+          />
+        </div>
+      )}
     </main>
   );
 }

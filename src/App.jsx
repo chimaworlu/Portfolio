@@ -1,6 +1,7 @@
 import { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
+import ScrollToTop from "./components/layout/ScrollToTop.jsx";
 import HomePage from "./pages/HomePage.jsx";
 
 const CaseStudyPage = lazy(() => import("./pages/CaseStudyPage.jsx"));
@@ -11,6 +12,7 @@ const ServiceHubCaseStudy = lazy(() =>
 export default function App() {
   return (
     <ThemeProvider>
+      <ScrollToTop />
       <Suspense fallback={<div className="min-h-screen bg-white dark:bg-ink" />}>
         <Routes>
           <Route path="/" element={<HomePage />} />

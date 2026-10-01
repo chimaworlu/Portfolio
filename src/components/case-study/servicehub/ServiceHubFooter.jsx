@@ -25,7 +25,7 @@ export default function ServiceHubFooter() {
   }, []);
 
   return (
-    <section className="mt-section scroll-mt-20 pb-24 text-center">
+    <section className="mt-20 scroll-mt-20 pb-24 text-center sm:mt-section">
       <Container>
         <div ref={contentRef}>
           <a
@@ -43,7 +43,7 @@ export default function ServiceHubFooter() {
             </p>
             <Link
               to="/work/uxlens-ai"
-              className="group mt-2 inline-flex items-center gap-2 text-3xl font-bold text-ink hover:text-brand-blue dark:text-white dark:hover:text-blue-400"
+              className="group mt-2 inline-flex items-center gap-2 font-display text-3xl text-ink transition-colors duration-200 hover:text-secondary-text dark:text-white dark:hover:text-slate-400"
             >
               UXLens AI
               <span

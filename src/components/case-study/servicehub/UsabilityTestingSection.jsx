@@ -54,14 +54,14 @@ export default function UsabilityTestingSection() {
   }, []);
 
   return (
-    <section className="mt-section scroll-mt-20">
+    <section className="mt-20 scroll-mt-20 sm:mt-section">
       <Container>
         <div ref={contentRef}>
-          <SectionEyebrow>Usability Testing</SectionEyebrow>
-          <h2 className="mt-2 text-3xl font-bold text-ink dark:text-white">
+          <SectionEyebrow color="#2563EB">Usability Testing</SectionEyebrow>
+          <h2 className="mt-2 font-display text-2xl text-ink dark:text-white sm:text-3xl">
             Refining the Experience
           </h2>
-          <p className="mt-3 max-w-2xl text-secondary-text dark:text-slate-400">
+          <p className="mt-6 max-w-2xl text-secondary-text dark:text-slate-400">
             A prototype only earns its place once it's tested against real
             behavior.
           </p>
@@ -85,7 +85,7 @@ export default function UsabilityTestingSection() {
 
         <div
           ref={columnsRef}
-          className="mt-12 grid grid-cols-1 gap-10 sm:grid-cols-2"
+          className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2"
         >
           {versions.map((version) => (
             <div key={version.label} className="flex flex-col items-center">

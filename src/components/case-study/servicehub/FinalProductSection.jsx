@@ -74,16 +74,18 @@ function FlowGroup({ flow }) {
 
   return (
     <div ref={groupRef} className="mt-14 first:mt-10">
-      <div data-reveal className="flex items-center gap-3">
-        <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-brand-blue text-sm font-bold text-white">
-          {flow.number}
-        </span>
-        <h3 className="text-xl font-bold text-ink dark:text-white">
-          {flow.title}
-        </h3>
-        <span className="text-sm text-secondary-text dark:text-slate-400">
+      <div data-reveal>
+        <div className="flex items-center gap-3">
+          <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-brand-blue text-sm font-bold text-white">
+            {flow.number}
+          </span>
+          <h3 className="text-xl font-bold text-ink dark:text-white">
+            {flow.title}
+          </h3>
+        </div>
+        <p className="ml-10 mt-1 text-sm text-secondary-text dark:text-slate-400">
           {flow.subtitle}
-        </span>
+        </p>
       </div>
 
       <div data-reveal className="mt-6 flex flex-wrap items-start gap-6">
@@ -120,14 +122,14 @@ export default function FinalProductSection() {
   }, []);
 
   return (
-    <section className="mt-section scroll-mt-20">
+    <section className="mt-20 scroll-mt-20 sm:mt-section">
       <Container>
         <div ref={headerRef}>
-          <SectionEyebrow>Final Product</SectionEyebrow>
-          <h2 className="mt-2 text-3xl font-bold text-ink dark:text-white">
+          <SectionEyebrow color="#2563EB">Final Product</SectionEyebrow>
+          <h2 className="mt-2 font-display text-2xl text-ink dark:text-white sm:text-3xl">
             30+ Screens, Four Core Flows
           </h2>
-          <p className="mt-3 max-w-2xl text-secondary-text dark:text-slate-400">
+          <p className="mt-6 max-w-2xl text-secondary-text dark:text-slate-400">
             From discovering a provider to leaving a review, every step
             designed.
           </p>

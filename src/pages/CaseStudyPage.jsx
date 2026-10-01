@@ -13,10 +13,11 @@ export default function CaseStudyPage({ slug }) {
   const nextProject = getNextProject(slug);
 
   return (
-    <>
+    <div className="bg-[#FAFAF7] dark:bg-ink">
       <Nav variant="case-study" />
       <CaseStudyTemplate
         projectName={project.name}
+        cardColor={project.cardColor}
         positioning={project.positioning}
         role={project.role}
         timeline={project.timeline}
@@ -35,6 +36,6 @@ export default function CaseStudyPage({ slug }) {
         whatsNext={project.whatsNext}
         nextProject={nextProject}
       />
-    </>
+    </div>
   );
 }
