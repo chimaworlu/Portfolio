@@ -21,6 +21,7 @@ const socials = [
 
 export default function Contact() {
   const contentRef = useRef(null);
+  const copyrightRef = useRef(null);
   const [copied, setCopied] = useState(false);
 
   async function handleEmailClick(event) {
@@ -36,7 +37,11 @@ export default function Contact() {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(gsap.utils.toArray(contentRef.current.children), {
+      const entranceChildren = gsap.utils
+        .toArray(contentRef.current.children)
+        .filter((child) => child !== copyrightRef.current);
+
+      gsap.from(entranceChildren, {
         opacity: 0,
         y: 24,
         duration: 0.6,
@@ -47,6 +52,17 @@ export default function Contact() {
           start: "top 85%",
         },
       });
+
+      gsap.fromTo(
+        copyrightRef.current,
+        { opacity: 0.35 },
+        {
+          opacity: 1,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: { trigger: copyrightRef.current, start: "top 95%" },
+        }
+      );
     }, contentRef);
 
     return () => ctx.revert();
@@ -93,7 +109,9 @@ export default function Contact() {
           ))}
         </div>
 
-        <p className="font-sans text-sm text-slate-400">© 2026 Chima Worlu</p>
+        <p ref={copyrightRef} className="font-sans text-sm text-slate-400">
+          © 2026 Chima Worlu
+        </p>
       </Container>
     </section>
   );

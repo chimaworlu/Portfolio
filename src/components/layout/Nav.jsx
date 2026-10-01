@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { gsap } from "../../lib/gsap.js";
 import Container from "./Container.jsx";
 
 const homeLinks = [
@@ -19,16 +18,6 @@ const linkClass =
 export default function Nav({ variant = "home" }) {
   const isHome = variant === "home";
   const [menuOpen, setMenuOpen] = useState(false);
-
-  function handleLinkEnter(event) {
-    const underline = event.currentTarget.querySelector("[data-underline]");
-    gsap.to(underline, { scaleX: 1, duration: 0.35, ease: "power2.out" });
-  }
-
-  function handleLinkLeave(event) {
-    const underline = event.currentTarget.querySelector("[data-underline]");
-    gsap.to(underline, { scaleX: 0, duration: 0.3, ease: "power2.out" });
-  }
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -61,16 +50,9 @@ export default function Nav({ variant = "home" }) {
                 <a
                   key={link.label}
                   href={link.href}
-                  onMouseEnter={handleLinkEnter}
-                  onMouseLeave={handleLinkLeave}
-                  className={`relative inline-block ${linkClass} hover:text-secondary-text dark:hover:text-slate-400`}
+                  className={`${linkClass} transition-colors duration-200 hover:text-secondary-text dark:hover:text-slate-400`}
                 >
                   {link.label}
-                  <span
-                    data-underline
-                    aria-hidden="true"
-                    className="absolute inset-x-0 -bottom-1 h-[1.5px] origin-left scale-x-0 bg-ink dark:bg-white"
-                  />
                 </a>
               ))}
             </nav>
@@ -121,7 +103,7 @@ export default function Nav({ variant = "home" }) {
               <a
                 key={link.label}
                 href={link.href}
-                className={`${linkClass} hover:text-ink dark:hover:text-white`}
+                className={`${linkClass} transition-colors duration-200 hover:text-ink dark:hover:text-white`}
               >
                 {link.label}
               </a>
@@ -142,7 +124,7 @@ export default function Nav({ variant = "home" }) {
                   key={link.label}
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
-                  className="font-sans text-2xl font-medium tracking-wide text-ink hover:text-secondary-text dark:text-white dark:hover:text-slate-400"
+                  className="font-sans text-2xl font-medium tracking-wide text-ink transition-colors duration-200 hover:text-secondary-text dark:text-white dark:hover:text-slate-400"
                 >
                   {link.label}
                 </a>

@@ -8,17 +8,30 @@ export default function About() {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from([headingRef.current, paraRef.current], {
+      gsap.from(headingRef.current, {
         opacity: 0,
         y: 24,
         duration: 0.6,
         ease: "power2.out",
-        stagger: 0.08,
         scrollTrigger: {
           trigger: headingRef.current,
           start: "top 85%",
         },
       });
+
+      gsap.fromTo(
+        paraRef.current,
+        { opacity: 0.35 },
+        {
+          opacity: 1,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: paraRef.current,
+            start: "top 90%",
+          },
+        }
+      );
     }, headingRef);
 
     return () => ctx.revert();
