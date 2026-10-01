@@ -54,15 +54,15 @@ export default function WireframeIterationSection() {
   }, []);
 
   return (
-    <section className="mt-section scroll-mt-20">
+    <section className="mt-20 scroll-mt-20 sm:mt-section">
       <Container>
         <div ref={contentRef}>
-          <SectionEyebrow>Iteration</SectionEyebrow>
-          <h2 className="mt-2 text-3xl font-bold text-ink dark:text-white">
+          <SectionEyebrow color="#2563EB">Iteration</SectionEyebrow>
+          <h2 className="mt-2 font-display text-2xl text-ink dark:text-white sm:text-3xl">
             Wireframe Iteration: Homepage
           </h2>
 
-          <blockquote className="mt-10 max-w-xl border-l-2 border-brand-blue bg-slate-50 py-4 pl-6 dark:bg-slate-800">
+          <blockquote className="mt-8 max-w-xl border-l-2 border-brand-blue bg-slate-50 py-4 pl-6 dark:bg-slate-800">
             <p className="text-lg italic text-ink dark:text-white">
               &ldquo;After reviewing the initial homepage with potential
               users, feedback showed the horizontal category layout
@@ -76,7 +76,7 @@ export default function WireframeIterationSection() {
 
         <div
           ref={columnsRef}
-          className="mt-12 grid grid-cols-1 gap-10 sm:grid-cols-2"
+          className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2"
         >
           {versions.map((version) => (
             <div key={version.label} className="flex flex-col items-center">

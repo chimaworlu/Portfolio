@@ -121,14 +121,14 @@ export default function InsightsSection() {
   }, []);
 
   return (
-    <section id="insights" className="mt-section scroll-mt-20">
+    <section id="insights" className="mt-20 scroll-mt-20 sm:mt-section">
       <Container>
         <div ref={headerRef}>
-          <SectionEyebrow>Insights</SectionEyebrow>
-          <h2 className="mt-2 text-3xl font-bold text-ink dark:text-white">
+          <SectionEyebrow color="#2563EB">Insights</SectionEyebrow>
+          <h2 className="mt-2 font-display text-2xl text-ink dark:text-white sm:text-3xl">
             Three Truths That Shaped the Design
           </h2>
-          <p className="mt-3 max-w-2xl text-secondary-text dark:text-slate-400">
+          <p className="mt-6 max-w-2xl text-secondary-text dark:text-slate-400">
             I initially assumed price would be the primary concern. The data
             said otherwise: trust and speed drive decisions more than cost.
           </p>

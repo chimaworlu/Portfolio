@@ -110,9 +110,9 @@ const personas = [
 
 const traitGroups = [
   { key: "goals", label: "Goals", Icon: TargetIcon, color: "text-brand-blue dark:text-blue-300" },
-  { key: "frustrations", label: "Frustrations", Icon: AlertIcon, color: "text-red-500 dark:text-red-400" },
-  { key: "behaviors", label: "Behaviors", Icon: ZapIcon, color: "text-purple-500 dark:text-purple-400" },
-  { key: "motivations", label: "Motivations", Icon: TrendingUpIcon, color: "text-green-500 dark:text-green-400" },
+  { key: "frustrations", label: "Frustrations", Icon: AlertIcon, color: "text-brand-blue dark:text-blue-300" },
+  { key: "behaviors", label: "Behaviors", Icon: ZapIcon, color: "text-brand-blue dark:text-blue-300" },
+  { key: "motivations", label: "Motivations", Icon: TrendingUpIcon, color: "text-brand-blue dark:text-blue-300" },
 ];
 
 function PersonaCard({ persona }) {
@@ -207,14 +207,14 @@ export default function PersonasSection() {
   }, []);
 
   return (
-    <section className="mt-section scroll-mt-20">
+    <section className="mt-20 scroll-mt-20 sm:mt-section">
       <Container>
         <div ref={headerRef}>
-          <SectionEyebrow>Meet the Users</SectionEyebrow>
-          <h2 className="mt-2 text-3xl font-bold text-ink dark:text-white">
+          <SectionEyebrow color="#2563EB">Meet the Users</SectionEyebrow>
+          <h2 className="mt-2 font-display text-2xl text-ink dark:text-white sm:text-3xl">
             Two Students, Two Realities
           </h2>
-          <p className="mt-3 max-w-2xl text-secondary-text dark:text-slate-400">
+          <p className="mt-6 max-w-2xl text-secondary-text dark:text-slate-400">
             Research surfaced two distinct segments within the student
             population.
           </p>

@@ -31,29 +31,29 @@ export const projects = [
     contextHeadline:
       "Fifty-four responses. No way to know what they actually meant.",
     contextParagraph:
-      "I ran a survey for ServiceHub and got fifty-four responses back. Google Forms could show me the raw answers, but it couldn't tell me which problems came up most, what patterns connected them, or point me back to which response said what. So I read all fifty-four by hand, the same evening most designers spend doing exactly that. UXLens AI exists so nobody has to.",
+      "I ran a survey for ServiceHub and got fifty-four responses back. Google Forms showed me the answers, but not what they meant together, or which response said what. So I read all fifty-four by hand. UXLens AI exists so nobody has to.",
     roleOwnership:
-      "I owned this project end to end, from problem to shipped product. I defined the core idea and every requirement, working closely with AI to develop the specs and architecture, reviewing, accepting, or rejecting each decision along the way. Every screen was designed in Figma before a single line of code was written.",
+      "I owned this project end to end. I defined the core idea and every requirement, working closely with AI to develop the specs, reviewing and approving each decision. Every screen was designed in Figma first.",
     decisionsHeadline: "The Decisions That Shaped the Build",
     obstaclesHeadline: "What Went Wrong, and What I Did About It",
     keyDecisions: [
       {
-        title: "Citation Verification Runs on Code, Not AI",
-        body: "Every quote gets checked by real string-matching, never another AI call grading itself. Anything unverifiable gets dropped, not shown.",
+        title: "Citations Verified in Code",
+        body: "Every quote is checked by real string-matching, not another AI call. Unverifiable ones get dropped.",
       },
       {
-        title: "No Vector Database, Until the Numbers Say Otherwise",
-        body: "Full content goes straight to the model when it fits, search is only a fallback for larger projects. No embeddings, unless the data says I need them.",
+        title: "No Vector Database Yet",
+        body: "Full content goes straight to the model when it fits. No embeddings, unless the data says I need them.",
       },
       {
-        title: "Cut My Own Quotas After Checking the Math",
-        body: "My original limits looked fine on paper. The real cost math showed otherwise, so I lowered them before launch, not after.",
+        title: "Cut My Own Quotas",
+        body: "My limits looked fine on paper. The real cost math said otherwise, so I lowered them before launch.",
       },
     ],
     obstacles: [
       {
         title: "Built the Wrong Payment Provider First",
-        body: "Built the entire billing flow on Flutterwave, then switched to Paystack mid-project. Tearing out working code isn't fun, but better before launch than after.",
+        body: "Built the entire billing flow on Flutterwave, then switched to Paystack mid-project. Better to fix it before launch than after.",
       },
     ],
     builtScreens: [
@@ -83,11 +83,11 @@ export const projects = [
     outcomeSummary:
       "UXLens AI works end to end today, upload, analysis, citations, chat, all functional and ready to use.",
     whatsNext: [
-      "The one honest gap left is analytics instrumentation, everything else has been checked against the original requirements and holds up.",
+      "The one honest gap left is analytics instrumentation. Everything else holds up.",
     ],
     learnings: [
-      "Building the citation-verification step taught me something about trust in AI products, it's not enough for an AI to sound right, the system needs a way to prove it, in code, every time.",
-      "Working this closely with AI on a real product changed how I think about my own role, less about writing every line, more about making every call.",
+      "Citation verification taught me AI sounding right isn't enough, it needs to prove it, in code.",
+      "Working this closely with AI changed how I see my own role, less about writing every line, more about every call.",
     ],
   },
   {
@@ -108,29 +108,29 @@ export const projects = [
     tools: "Design in Code, Next.js, Claude Code",
     contextHeadline: "Handwritten notes that never became anything useful.",
     contextParagraph:
-      "The idea came from my own schooling in Nigeria, notebooks full of handwritten notes that stayed exactly that, notes, never organized, never easy to revisit before an exam. I wasn't testing a validated theory, I was designing for a problem I'd actually lived. Legible turns that pile of photos into something you'd actually want to read.",
+      "The idea came from my own schooling in Nigeria, notebooks full of handwritten notes that never got organized or revisited. I wasn't testing a validated theory, I was designing for a problem I'd lived. Legible turns that pile of photos into something worth reading.",
     roleOwnership:
-      "I owned this project end to end, from problem to shipped product. I defined the idea, worked closely with AI to develop the requirements and architecture, reviewing, accepting, or rejecting each decision along the way. Unlike a typical design-to-code process, there was no Figma UI step here, I designed the tokens, then made every screen and layout decision directly in code.",
+      "I owned this project end to end, working closely with AI on every decision. No Figma UI step, I designed the tokens, then built every screen directly in code.",
     decisionsHeadline: "The Decisions That Shaped the Build",
     obstaclesHeadline: "What Went Wrong, and What I Did About It",
     keyDecisions: [
       {
-        title: "Caught an AI Asking to Fabricate Content",
-        body: "DeepSeek wanted to rephrase and expand transcriptions using its own knowledge. That's fabrication, against my own rules. I split it into a separate, clearly-labeled Summarize feature instead of letting it blur into the real transcript.",
+        title: "Caught an AI Trying to Fabricate",
+        body: "DeepSeek wanted to rephrase transcriptions using its own knowledge. I split that out into a separate Summarize feature.",
       },
       {
-        title: "Split AI Providers by What They're Actually Good At",
-        body: "DeepSeek rejected image uploads outright. Rather than force one provider to do everything, DeepSeek handles text, Gemini handles vision, both behind the same interface.",
+        title: "Split AI Providers by Strength",
+        body: "DeepSeek rejected image uploads, so DeepSeek handles text, Gemini handles vision.",
       },
       {
-        title: "Cost Checks Run Per Image, Not Per Batch",
-        body: "A batch of images can push the running cost mid-way through. Checking once at the start wasn't enough, so every single image gets its own gate.",
+        title: "Cost Checks Run Per Image",
+        body: "A batch can push cost mid-way through, so every image gets its own check.",
       },
     ],
     obstacles: [
       {
-        title: "Chased a Broken Feature That Was Actually Just Not Running",
-        body: "Jobs sat stuck for no visible reason, more than once. Turned out the background worker process just wasn't running, not a code bug at all.",
+        title: "Chased a Bug That Wasn't a Bug",
+        body: "Jobs sat stuck for no visible reason. Turned out the background worker process just wasn't running, not a code bug.",
       },
     ],
     toolGroups: [
@@ -151,10 +151,10 @@ export const projects = [
       },
     ],
     outcomeSummary:
-      "Legible works end to end today, upload, transcription, in-app reading, and PDF export are all functional. Chapter grouping and the editing experience are still ahead, and a few smaller gaps, like the free-plan watermark, are still open.",
+      "Legible works end to end today. Upload, transcription, chapter grouping, editing, and export are all fully functional.",
     learnings: [
       "Building the fabrication check taught me that AI-assisted still means I own every line it produces, especially when it tries to do more than I asked.",
-      "Chapter grouping and editing didn't make it into this build. Shipping a smaller, working core mattered more than shipping every planned feature half-done.",
+      "Chasing that 'broken' feature taught me to verify before assuming, the simplest explanation is usually right.",
     ],
   },
   {

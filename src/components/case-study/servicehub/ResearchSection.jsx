@@ -107,14 +107,14 @@ export default function ResearchSection() {
   }, []);
 
   return (
-    <section id="research" className="mt-section scroll-mt-20">
+    <section id="research" className="mt-20 scroll-mt-20 sm:mt-section">
       <Container>
         <div ref={headerRef}>
-          <SectionEyebrow>Research &amp; Discovery</SectionEyebrow>
-          <h2 className="mt-2 text-3xl font-bold text-ink dark:text-white">
+          <SectionEyebrow color="#2563EB">Research &amp; Discovery</SectionEyebrow>
+          <h2 className="mt-2 font-display text-2xl text-ink dark:text-white sm:text-3xl">
             Understanding the Problem
           </h2>
-          <p className="mt-3 max-w-2xl text-secondary-text dark:text-slate-400">
+          <p className="mt-6 max-w-2xl text-secondary-text dark:text-slate-400">
             Quantitative and qualitative research into how students currently
             find and hire home service providers, their pain points, and what
             drives their decisions.

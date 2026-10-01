@@ -156,14 +156,14 @@ export default function FlowchartSection() {
   }, []);
 
   return (
-    <section className="mt-section scroll-mt-20">
+    <section className="mt-20 scroll-mt-20 sm:mt-section">
       <Container>
         <div ref={headerRef}>
-          <SectionEyebrow>Flow</SectionEyebrow>
-          <h2 className="mt-2 text-3xl font-bold text-ink dark:text-white">
+          <SectionEyebrow color="#2563EB">Flow</SectionEyebrow>
+          <h2 className="mt-2 font-display text-2xl text-ink dark:text-white sm:text-3xl">
             End-to-End User Flow
           </h2>
-          <p className="mt-3 max-w-2xl text-secondary-text dark:text-slate-400">
+          <p className="mt-6 max-w-2xl text-secondary-text dark:text-slate-400">
             From the moment a problem occurs to a confirmed booking. Drag to
             explore, use the plus and minus buttons to zoom.
           </p>

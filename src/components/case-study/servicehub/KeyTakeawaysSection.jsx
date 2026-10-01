@@ -37,15 +37,15 @@ export default function KeyTakeawaysSection() {
   }, []);
 
   return (
-    <section className="mt-section scroll-mt-20">
+    <section className="mt-20 scroll-mt-20 sm:mt-section">
       <Container>
         <div ref={contentRef}>
-          <SectionEyebrow>Research Impact</SectionEyebrow>
-          <h2 className="mt-2 text-3xl font-bold text-ink dark:text-white">
+          <SectionEyebrow color="#2563EB">Research Impact</SectionEyebrow>
+          <h2 className="mt-2 font-display text-2xl text-ink dark:text-white sm:text-3xl">
             Key Takeaways
           </h2>
 
-          <div className="mt-10 rounded-card border border-border p-8 dark:border-slate-700">
+          <div className="mt-8 rounded-card border border-border p-8 dark:border-slate-700">
             <p className="text-secondary-text dark:text-slate-400">
               This research phase fundamentally shaped the design approach. I
               initially assumed price would be the primary concern but the

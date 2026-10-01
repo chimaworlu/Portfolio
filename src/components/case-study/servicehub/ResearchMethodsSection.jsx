@@ -4,16 +4,13 @@ import Container from "../../layout/Container.jsx";
 import SectionEyebrow from "../SectionEyebrow.jsx";
 
 const cardColors = {
-  green:
-    "bg-green-100 text-green-900 dark:bg-green-500/15 dark:text-green-200",
-  purple:
-    "bg-purple-100 text-purple-900 dark:bg-purple-500/15 dark:text-purple-200",
-  coral: "bg-red-100 text-red-900 dark:bg-red-500/15 dark:text-red-200",
-  blue: "bg-blue-100 text-blue-900 dark:bg-blue-500/15 dark:text-blue-200",
-  yellow:
-    "bg-yellow-100 text-yellow-900 dark:bg-yellow-500/15 dark:text-yellow-200",
-  teal: "bg-teal-100 text-teal-900 dark:bg-teal-500/15 dark:text-teal-200",
-  pink: "bg-pink-100 text-pink-900 dark:bg-pink-500/15 dark:text-pink-200",
+  green: "bg-brand-blue-tint text-ink dark:bg-blue-500/15 dark:text-white",
+  purple: "bg-brand-blue-tint text-ink dark:bg-blue-500/15 dark:text-white",
+  coral: "bg-brand-blue-tint text-ink dark:bg-blue-500/15 dark:text-white",
+  blue: "bg-brand-blue-tint text-ink dark:bg-blue-500/15 dark:text-white",
+  yellow: "bg-brand-blue-tint text-ink dark:bg-blue-500/15 dark:text-white",
+  teal: "bg-brand-blue-tint text-ink dark:bg-blue-500/15 dark:text-white",
+  pink: "bg-brand-blue-tint text-ink dark:bg-blue-500/15 dark:text-white",
 };
 
 const groups = [
@@ -117,14 +114,14 @@ export default function ResearchMethodsSection() {
   }, []);
 
   return (
-    <section className="mt-section scroll-mt-20">
+    <section className="mt-20 scroll-mt-20 sm:mt-section">
       <Container>
         <div ref={headerRef}>
-          <SectionEyebrow>Affinity Map</SectionEyebrow>
-          <h2 className="mt-2 text-3xl font-bold text-ink dark:text-white">
+          <SectionEyebrow color="#2563EB">Affinity Map</SectionEyebrow>
+          <h2 className="mt-2 font-display text-2xl text-ink dark:text-white sm:text-3xl">
             Research Methods
           </h2>
-          <p className="mt-3 max-w-2xl text-secondary-text dark:text-slate-400">
+          <p className="mt-6 max-w-2xl text-secondary-text dark:text-slate-400">
             After collecting all survey responses and interview transcripts,
             I organized every insight using affinity mapping to identify
             patterns and recurring themes across user feedback.

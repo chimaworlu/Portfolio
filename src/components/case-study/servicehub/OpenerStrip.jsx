@@ -46,7 +46,7 @@ export default function OpenerStrip() {
             src={screen.src}
             alt={screen.alt}
             loading={i < screens.length ? "eager" : "lazy"}
-            className="h-96 w-56 flex-shrink-0 object-contain sm:h-[28rem] sm:w-64"
+            className="h-64 w-36 flex-shrink-0 object-contain sm:h-96 sm:w-56 lg:h-[28rem] lg:w-64"
           />
         ))}
       </div>

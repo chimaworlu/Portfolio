@@ -70,14 +70,14 @@ function PrincipleRow({ principle }) {
   return (
     <div
       ref={rowRef}
-      className={`relative mt-section flex flex-col items-center gap-10 sm:gap-16 lg:flex-row ${
+      className={`relative mt-20 flex flex-col items-center gap-10 sm:mt-section sm:gap-16 lg:flex-row ${
         principle.reversed ? "lg:flex-row-reverse" : ""
       }`}
     >
       <div data-reveal className="relative flex-1">
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute -top-20 left-[170px] -z-10 select-none text-[20rem] font-extrabold leading-none text-brand-blue-tint/70 dark:text-slate-800/70"
+          className="pointer-events-none absolute -top-20 left-[170px] -z-10 hidden select-none text-[20rem] font-extrabold leading-none text-brand-blue-tint/70 dark:text-slate-800/70 sm:block"
         >
           {principle.number}
         </span>
@@ -105,7 +105,7 @@ function PrincipleRow({ principle }) {
             src={screen.src}
             alt={screen.alt}
             loading="lazy"
-            className="h-96 w-56 object-contain sm:h-[28rem] sm:w-64"
+            className="h-64 w-36 object-contain sm:h-96 sm:w-56 lg:h-[28rem] lg:w-64"
           />
         ))}
       </div>
@@ -132,14 +132,14 @@ export default function SolutionSection() {
   }, []);
 
   return (
-    <section className="mt-section scroll-mt-20">
+    <section className="mt-20 scroll-mt-20 sm:mt-section">
       <Container>
         <div ref={headerRef}>
-          <SectionEyebrow>The Solution</SectionEyebrow>
-          <h2 className="mt-2 max-w-2xl text-3xl font-bold text-ink dark:text-white">
+          <SectionEyebrow color="#2563EB">The Solution</SectionEyebrow>
+          <h2 className="mt-2 max-w-2xl font-display text-2xl text-ink dark:text-white sm:text-3xl">
             Building trust through peer-to-peer accountability
           </h2>
-          <p className="mt-3 max-w-xl text-secondary-text dark:text-slate-400">
+          <p className="mt-6 max-w-xl text-secondary-text dark:text-slate-400">
             Where the process landed: three principles the final product is
             built on.
           </p>

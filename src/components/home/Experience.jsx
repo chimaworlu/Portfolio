@@ -43,6 +43,19 @@ export default function Experience() {
           start: "top 85%",
         },
       });
+
+      gsap.utils.toArray(listRef.current.querySelectorAll("[data-fade-text]")).forEach((el) => {
+        gsap.fromTo(
+          el,
+          { opacity: 0.35 },
+          {
+            opacity: 1,
+            duration: 0.8,
+            ease: "power2.out",
+            scrollTrigger: { trigger: el, start: "top 90%" },
+          }
+        );
+      });
     }, sectionRef);
 
     return () => ctx.revert();
@@ -63,9 +76,17 @@ export default function Experience() {
             >
               <div>
                 <p className="font-sans font-semibold text-ink dark:text-white">{row.company}</p>
-                <p className="mt-1 font-sans text-sm text-secondary-text dark:text-slate-400">{row.role}</p>
+                <p
+                  data-fade-text
+                  className="mt-1 font-sans text-sm text-secondary-text dark:text-slate-400"
+                >
+                  {row.role}
+                </p>
               </div>
-              <p className="font-sans text-sm text-secondary-text dark:text-slate-400 sm:whitespace-nowrap">
+              <p
+                data-fade-text
+                className="font-sans text-sm text-secondary-text dark:text-slate-400 sm:whitespace-nowrap"
+              >
                 {row.dates}
               </p>
             </div>

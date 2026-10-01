@@ -178,9 +178,9 @@ function EmotionChart() {
           style={{
             left: `${points[i].x}px`,
             top: `${points[i].y}px`,
-            transform: `translateX(-50%) translateY(${
-              stage.labelPos === "above" ? "-100%" : "0"
-            })`,
+            transform: `translateX(${
+              i === 0 ? "0%" : i === stages.length - 1 ? "-100%" : "-50%"
+            }) translateY(${stage.labelPos === "above" ? "-100%" : "0"})`,
           }}
         >
           {stage.emotion}
@@ -218,52 +218,56 @@ export default function UserJourneySection() {
   }, []);
 
   return (
-    <section className="mt-section scroll-mt-20">
+    <section className="mt-20 scroll-mt-20 sm:mt-section">
       <Container>
         <div ref={headerRef}>
-          <SectionEyebrow>Define</SectionEyebrow>
-          <h2 className="mt-2 text-3xl font-bold text-ink dark:text-white">
+          <SectionEyebrow color="#2563EB">Define</SectionEyebrow>
+          <h2 className="mt-2 font-display text-2xl text-ink dark:text-white sm:text-3xl">
             Current User Journey
           </h2>
-          <p className="mt-3 max-w-2xl text-secondary-text dark:text-slate-400">
+          <p className="mt-6 max-w-2xl text-secondary-text dark:text-slate-400">
             Connecting pain points to product opportunities.
           </p>
         </div>
 
         <div ref={mapRef} className="mt-10">
-          <div className="grid grid-cols-6 gap-2 sm:gap-3">
-            {stages.map((stage) => (
-              <p
-                key={stage.name}
-                className="text-center text-[9px] font-semibold uppercase tracking-wide text-secondary-text dark:text-slate-400 sm:text-[11px]"
-              >
-                {stage.name}
-              </p>
-            ))}
-          </div>
-
-          <EmotionChart />
-
-          {[
-            { key: "doing", label: "Doing" },
-            { key: "pain", label: "Pain" },
-          ].map((row) => (
-            <div key={row.key} className="mt-8 flex items-stretch gap-3 sm:gap-4">
-              <span className={rowLabelClass} style={{ writingMode: "vertical-rl" }}>
-                {row.label}
-              </span>
-              <div className="grid flex-1 grid-cols-6 gap-3 sm:gap-4">
+          <div className="overflow-x-auto">
+            <div className="min-w-[640px] sm:min-w-0">
+              <div className="grid grid-cols-6 gap-2 sm:gap-3">
                 {stages.map((stage) => (
-                  <div
+                  <p
                     key={stage.name}
-                    className="rounded-md border border-border p-3 text-[11px] text-secondary-text dark:border-slate-700 dark:text-slate-400 sm:p-4 sm:text-xs"
+                    className="text-center text-[9px] font-semibold uppercase tracking-wide text-secondary-text dark:text-slate-400 sm:text-[11px]"
                   >
-                    {stage[row.key]}
-                  </div>
+                    {stage.name}
+                  </p>
                 ))}
               </div>
+
+              <EmotionChart />
+
+              {[
+                { key: "doing", label: "Doing" },
+                { key: "pain", label: "Pain" },
+              ].map((row) => (
+                <div key={row.key} className="mt-8 flex items-stretch gap-3 sm:gap-4">
+                  <span className={rowLabelClass} style={{ writingMode: "vertical-rl" }}>
+                    {row.label}
+                  </span>
+                  <div className="grid flex-1 grid-cols-6 gap-3 sm:gap-4">
+                    {stages.map((stage) => (
+                      <div
+                        key={stage.name}
+                        className="rounded-md border border-border p-3 text-[11px] text-secondary-text dark:border-slate-700 dark:text-slate-400 sm:p-4 sm:text-xs"
+                      >
+                        {stage[row.key]}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
 
           <div className="mt-8 flex items-center gap-3 sm:gap-4">
             <span className={rowLabelClass} style={{ writingMode: "vertical-rl" }}>

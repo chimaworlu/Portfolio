@@ -1,5 +1,4 @@
 import Nav from "../components/layout/Nav.jsx";
-import Container from "../components/layout/Container.jsx";
 import OpenerStrip from "../components/case-study/servicehub/OpenerStrip.jsx";
 import ProblemSection from "../components/case-study/servicehub/ProblemSection.jsx";
 import SolutionSection from "../components/case-study/servicehub/SolutionSection.jsx";
@@ -21,12 +20,12 @@ import ServiceHubFooter from "../components/case-study/servicehub/ServiceHubFoot
 
 export default function ServiceHubCaseStudy() {
   return (
-    <>
+    <div className="bg-[#FAFAF7] dark:bg-ink">
       <Nav variant="case-study" />
       <main className="pt-20">
-        <Container className="pt-10">
+        <div className="pt-10">
           <OpenerStrip />
-        </Container>
+        </div>
 
         <ProblemSection />
         <SolutionSection />
@@ -46,6 +45,6 @@ export default function ServiceHubCaseStudy() {
         <LessonsLearnedSection />
         <ServiceHubFooter />
       </main>
-    </>
+    </div>
   );
 }

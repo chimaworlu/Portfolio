@@ -1,21 +1,29 @@
-import { useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { gsap } from "../../lib/gsap.js";
 
 export default function ProjectCard({ project, index }) {
   const imageFirst = index % 2 === 0;
   const [overlayActive, setOverlayActive] = useState(false);
-  const hasImageOverlay = Boolean(project.gridImage) && project.slug !== "servicehub";
+  const hasImageOverlay = Boolean(project.gridImage);
+  const descriptionRef = useRef(null);
 
-  function handleLinkEnter(event) {
-    const underline = event.currentTarget.querySelector("[data-underline]");
-    gsap.to(underline, { scaleX: 1, duration: 0.35, ease: "power2.out" });
-  }
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        descriptionRef.current,
+        { opacity: 0.35 },
+        {
+          opacity: 1,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: { trigger: descriptionRef.current, start: "top 90%" },
+        }
+      );
+    });
 
-  function handleLinkLeave(event) {
-    const underline = event.currentTarget.querySelector("[data-underline]");
-    gsap.to(underline, { scaleX: 0, duration: 0.3, ease: "power2.out" });
-  }
+    return () => ctx.revert();
+  }, []);
 
   return (
     <div className="grid grid-cols-1 items-center gap-10 py-16 sm:gap-16 sm:py-20 lg:grid-cols-2 lg:gap-20">
@@ -116,16 +124,18 @@ export default function ProjectCard({ project, index }) {
           {project.name}
         </h3>
 
-        <p className="mt-6 max-w-md font-sans text-sm text-secondary-text dark:text-slate-400">
+        <p
+          ref={descriptionRef}
+          className="mt-6 max-w-md font-sans text-sm text-secondary-text dark:text-slate-400"
+        >
           {project.outcome ?? "[ONE-LINE PROJECT OUTCOME - PLACEHOLDER]"}
         </p>
 
         <div className="mt-10 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-6">
           <Link
             to={project.href}
-            onMouseEnter={handleLinkEnter}
-            onMouseLeave={handleLinkLeave}
-            className="relative inline-flex items-center gap-1 font-sans text-sm font-medium text-ink dark:text-white"
+            style={{ "--accent": project.cardColor }}
+            className="inline-flex items-center gap-1 font-sans text-sm font-medium text-ink transition-colors duration-200 hover:text-[var(--accent)] dark:text-white"
           >
             View Case Study
             <span style={{ color: project.cardColor }} className="inline-flex">
@@ -143,11 +153,6 @@ export default function ProjectCard({ project, index }) {
                 <path d="M5 12h14M13 6l6 6-6 6" />
               </svg>
             </span>
-            <span
-              data-underline
-              aria-hidden="true"
-              className="absolute inset-x-0 -bottom-1 h-[1px] origin-left scale-x-0 bg-ink dark:bg-white"
-            />
           </Link>
 
           {project.link && (
@@ -155,9 +160,8 @@ export default function ProjectCard({ project, index }) {
               href={project.link.href}
               target="_blank"
               rel="noreferrer"
-              onMouseEnter={handleLinkEnter}
-              onMouseLeave={handleLinkLeave}
-              className="relative inline-flex items-center gap-1 font-sans text-sm font-medium text-ink dark:text-white"
+              style={{ "--accent": project.cardColor }}
+              className="inline-flex items-center gap-1 font-sans text-sm font-medium text-ink transition-colors duration-200 hover:text-[var(--accent)] dark:text-white"
             >
               {project.link.label}
               <span style={{ color: project.cardColor }} className="inline-flex">
@@ -175,11 +179,6 @@ export default function ProjectCard({ project, index }) {
                   <path d="M7 17L17 7M8 7h9v9" />
                 </svg>
               </span>
-              <span
-                data-underline
-                aria-hidden="true"
-                className="absolute inset-x-0 -bottom-1 h-[1px] origin-left scale-x-0 bg-ink dark:bg-white"
-              />
             </a>
           )}
         </div>
