@@ -4,6 +4,12 @@
 import uxlensScreenUpload from "../assets/uxlens-ai/screen-upload.png";
 import uxlensScreenInsights from "../assets/uxlens-ai/screen-insights.png";
 import uxlensScreenChat from "../assets/uxlens-ai/screen-chat.png";
+import uxlensGridImage from "../assets/projects-grid/uxlens-ai.png";
+import legibleGridImage from "../assets/projects-grid/legible.png";
+import servicehubGridImage from "../assets/projects-grid/servicehub.png";
+
+const SERVICEHUB_FIGMA_URL =
+  "https://www.figma.com/design/qenncamO8BWYaKMJDo8RvT/Home-Service-App?node-id=108-4&t=AP0MDwpCSSvJFdYi-1";
 
 export const projects = [
   {
@@ -13,6 +19,10 @@ export const projects = [
     caseStudyReady: true,
     href: "/work/uxlens-ai",
     outcome: "Reads your research, finds the patterns, shows you exactly where.",
+    gridImage: uxlensGridImage,
+    cardColor: "#3457D5",
+    projectType: "Full-Stack AI Product",
+    link: { label: "View Live", href: "#" },
     positioning:
       "AI-powered research synthesis, every insight traceable back to its source.",
     role: "Design to MVP, end to end",
@@ -86,7 +96,11 @@ export const projects = [
     hasLiveBadge: true,
     caseStudyReady: true,
     href: "/work/legible",
-    outcome: "Turns handwritten notes into a clean, structured digital book.",
+    outcome: "Turns messy handwritten notes into a clean digital book you can actually read.",
+    gridImage: legibleGridImage,
+    cardColor: "#00B407",
+    projectType: "Full-Stack AI Product",
+    link: { label: "View Live", href: "#" },
     positioning:
       "Turns messy handwritten notes into a clean digital book you can actually read.",
     role: "Design to MVP, end to end",
@@ -150,7 +164,10 @@ export const projects = [
     caseStudyReady: true,
     href: "/work/servicehub",
     outcome: "Helping students find and book trusted home service providers.",
-    videoId: "48aAL7gLUOo",
+    gridImage: servicehubGridImage,
+    cardColor: "#2563EB",
+    projectType: "UX Research, Product Design",
+    link: { label: "View Figma", href: SERVICEHUB_FIGMA_URL },
   },
 ];
 

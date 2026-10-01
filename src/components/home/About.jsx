@@ -25,15 +25,15 @@ export default function About() {
   }, []);
 
   return (
-    <section id="about" className="mt-20 scroll-mt-20 sm:mt-section">
+    <section id="about" className="mt-20 scroll-mt-20 bg-[#FAFAF7] dark:bg-ink sm:mt-section">
       <Container>
-        <h2 ref={headingRef} className="text-3xl font-bold text-ink dark:text-white">
+        <h2 ref={headingRef} className="font-display text-3xl text-ink dark:text-white">
           About
         </h2>
 
         <p
           ref={paraRef}
-          className="mx-auto mt-10 max-w-2xl text-center text-secondary-text dark:text-slate-400"
+          className="mx-auto mt-10 max-w-2xl text-center font-sans text-secondary-text dark:text-slate-400"
         >
           I&apos;m a Product Designer who spends time across design, research,
           and building, moving between Figma and code depending on what a

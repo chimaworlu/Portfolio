@@ -13,10 +13,13 @@ export default {
           "sans-serif",
         ],
         syne: ["Syne", "sans-serif"],
+        display: ["Anton", "sans-serif"],
+        poppins: ["Poppins", "sans-serif"],
       },
       colors: {
         "brand-blue": "#2563EB",
         "brand-blue-tint": "#EFF4FE",
+        "brand-amber": "#D97706",
         ink: "#0F172A",
         "secondary-text": "#475569",
         border: "#E2E8F0",

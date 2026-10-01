@@ -7,7 +7,7 @@ import Contact from "../components/home/Contact.jsx";
 
 export default function HomePage() {
   return (
-    <>
+    <div className="bg-[#FAFAF7] dark:bg-ink">
       <Nav variant="home" />
       <main>
         <Hero />
@@ -16,6 +16,6 @@ export default function HomePage() {
         <About />
       </main>
       <Contact />
-    </>
+    </div>
   );
 }
