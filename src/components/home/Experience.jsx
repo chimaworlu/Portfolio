@@ -49,9 +49,9 @@ export default function Experience() {
   }, []);
 
   return (
-    <section id="experience" className="mt-20 scroll-mt-20 sm:mt-section">
+    <section id="experience" className="mt-20 scroll-mt-20 bg-[#FAFAF7] dark:bg-ink sm:mt-section">
       <Container>
-        <h2 ref={sectionRef} className="text-3xl font-bold text-ink dark:text-white">
+        <h2 ref={sectionRef} className="font-display text-3xl text-ink dark:text-white">
           Experience
         </h2>
 
@@ -62,10 +62,10 @@ export default function Experience() {
               className="flex flex-col gap-1 border-b border-border py-6 dark:border-slate-700 sm:flex-row sm:items-start sm:justify-between sm:gap-6"
             >
               <div>
-                <p className="font-semibold text-ink dark:text-white">{row.company}</p>
-                <p className="mt-1 text-sm text-secondary-text dark:text-slate-400">{row.role}</p>
+                <p className="font-sans font-semibold text-ink dark:text-white">{row.company}</p>
+                <p className="mt-1 font-sans text-sm text-secondary-text dark:text-slate-400">{row.role}</p>
               </div>
-              <p className="text-sm text-secondary-text dark:text-slate-400 sm:whitespace-nowrap">
+              <p className="font-sans text-sm text-secondary-text dark:text-slate-400 sm:whitespace-nowrap">
                 {row.dates}
               </p>
             </div>

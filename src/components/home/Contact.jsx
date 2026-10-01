@@ -55,7 +55,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="mt-20 scroll-mt-20 bg-brand-blue-tint py-16 dark:bg-blue-500/10 sm:mt-section sm:py-24"
+      className="mt-20 scroll-mt-20 bg-ink py-16 sm:mt-section sm:py-24"
     >
       <Container
         ref={contentRef}
@@ -65,12 +65,12 @@ export default function Contact() {
           <a
             href={`mailto:${email}`}
             onClick={handleEmailClick}
-            className="break-all text-xl font-bold text-brand-blue sm:text-2xl lg:text-3xl dark:text-blue-300"
+            className="break-all font-sans text-xl font-bold text-white sm:text-2xl lg:text-3xl"
           >
             {email}
           </a>
           <span
-            className={`pointer-events-none absolute inset-x-0 -bottom-6 text-xs font-medium text-secondary-text transition-opacity duration-300 dark:text-slate-400 ${
+            className={`pointer-events-none absolute inset-x-0 -bottom-6 font-sans text-xs font-medium text-slate-400 transition-opacity duration-300 ${
               copied ? "opacity-100" : "opacity-0"
             }`}
           >
@@ -86,16 +86,14 @@ export default function Contact() {
               target="_blank"
               rel="noreferrer"
               aria-label={label}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white text-brand-blue transition-colors hover:bg-brand-blue-tint dark:bg-slate-800 dark:text-blue-300 dark:hover:bg-slate-700"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
             >
               <Icon className="h-4 w-4" />
             </a>
           ))}
         </div>
 
-        <p className="text-sm text-secondary-text dark:text-slate-400">
-          © 2026 Chima Worlu
-        </p>
+        <p className="font-sans text-sm text-slate-400">© 2026 Chima Worlu</p>
       </Container>
     </section>
   );
