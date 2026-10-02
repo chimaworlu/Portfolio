@@ -11,6 +11,7 @@ import PersonasSection from "../components/case-study/servicehub/PersonasSection
 import UserJourneySection from "../components/case-study/servicehub/UserJourneySection.jsx";
 import HowMightWeSection from "../components/case-study/servicehub/HowMightWeSection.jsx";
 import InformationArchitectureSection from "../components/case-study/servicehub/InformationArchitectureSection.jsx";
+import WireframesSection from "../components/case-study/servicehub/WireframesSection.jsx";
 import WireframeIterationSection from "../components/case-study/servicehub/WireframeIterationSection.jsx";
 import FlowchartSection from "../components/case-study/servicehub/FlowchartSection.jsx";
 import FinalProductSection from "../components/case-study/servicehub/FinalProductSection.jsx";
@@ -38,6 +39,7 @@ export default function ServiceHubCaseStudy() {
         <UserJourneySection />
         <HowMightWeSection />
         <InformationArchitectureSection />
+        <WireframesSection />
         <WireframeIterationSection />
         <FlowchartSection />
         <FinalProductSection />

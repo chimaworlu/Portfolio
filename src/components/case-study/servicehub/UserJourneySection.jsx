@@ -1,74 +1,38 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState, useCallback } from "react";
 import { gsap } from "../../../lib/gsap.js";
 import Container from "../../layout/Container.jsx";
 import SectionEyebrow from "../SectionEyebrow.jsx";
+import userJourneyFull from "../../../assets/servicehub/user-journey-full.png";
 
-const stages = [
-  {
-    name: "Problem Occurs",
-    emotion: "Concerned",
-    y: 0.55,
-    labelPos: "below",
-    doing: "Notices problem, decides help is needed",
-    pain: "Don't know who to call",
-    opp: "Urgency triage",
-  },
-  {
-    name: "Searching for Help",
-    emotion: "Frustrated, hopeful",
-    y: 0.45,
-    labelPos: "below",
-    doing: "Asks family, friends, WhatsApp groups",
-    pain: "Takes too long, weeks to find someone",
-    opp: "Trusted digital discovery",
-  },
-  {
-    name: "Evaluating Options",
-    emotion: "Uncertain",
-    y: 0.25,
-    labelPos: "below",
-    doing: "Weighs 2-3 names, no way to verify",
-    pain: "No way to verify quality",
-    opp: "Verification & reviews",
-  },
-  {
-    name: "Contact & Booking",
-    emotion: "Nervous",
-    y: 0.5,
-    labelPos: "above",
-    doing: "Calls or texts, explains problem",
-    pain: "Vague timing, they said later",
-    opp: "Upfront pricing & availability",
-  },
-  {
-    name: "Waiting for Service",
-    emotion: "Anxious, powerless",
-    y: 0.05,
-    labelPos: "below",
-    doing: "Keeps phone nearby, waits, may miss classes",
-    pain: "No arrival updates, number may not connect",
-    opp: "Real-time ETA tracking",
-  },
-  {
-    name: "Service Delivery",
-    emotion: "Relieved",
-    y: 0.95,
-    labelPos: "above",
-    doing: "Provider arrives (or doesn't), pays",
-    pain: "Fear of being overcharged or disrespected",
-    opp: "Behavior-focused ratings",
-  },
-];
+const JOURNEY_ASPECT = 5600 / 4200;
+const MIN_SCALE = 0.6;
+const MAX_SCALE = 3;
+const SCALE_STEP = 0.4;
 
-const rowLabelClass =
-  "flex w-6 flex-shrink-0 items-center justify-center text-[10px] font-semibold uppercase tracking-wide text-secondary-text dark:text-slate-400";
+function getFitSize(size) {
+  if (!size.width) return { width: 0, height: 0 };
+  return { width: size.width, height: size.width / JOURNEY_ASPECT };
+}
 
-function EmotionChart() {
+function clampPan(pan, scale, size) {
+  if (!size.width || !size.height) return pan;
+  const fit = getFitSize(size);
+  const dispWidth = fit.width * scale;
+  const dispHeight = fit.height * scale;
+  const maxX = Math.max(0, (dispWidth - size.width) / 2);
+  const maxY = Math.max(0, (dispHeight - size.height) / 2);
+  return {
+    x: Math.min(maxX, Math.max(-maxX, pan.x)),
+    y: Math.min(maxY, Math.max(-maxY, pan.y)),
+  };
+}
+
+function UserJourneyViewer() {
   const containerRef = useRef(null);
-  const polylineRef = useRef(null);
-  const dotRefs = useRef([]);
-  const labelRefs = useRef([]);
   const [size, setSize] = useState({ width: 0, height: 0 });
+  const [scale, setScale] = useState(1);
+  const [pan, setPan] = useState({ x: 0, y: 0 });
+  const dragState = useRef(null);
 
   useLayoutEffect(() => {
     function measure() {
@@ -83,116 +47,96 @@ function EmotionChart() {
     return () => window.removeEventListener("resize", measure);
   }, []);
 
-  // Real pixel coordinates (not a stretched viewBox) so the stroke and its
-  // dash pattern render correctly regardless of the chart's aspect ratio.
-  const points = stages.map((stage, i) => ({
-    x: (i / (stages.length - 1)) * size.width,
-    y: (1 - stage.y) * size.height,
-  }));
-  const polylinePoints = points.map((p) => `${p.x},${p.y}`).join(" ");
+  const applyScale = useCallback(
+    (next) => {
+      const clamped = Math.min(MAX_SCALE, Math.max(MIN_SCALE, next));
+      setScale(clamped);
+      setPan((prev) => clampPan(prev, clamped, size));
+    },
+    [size]
+  );
 
-  useLayoutEffect(() => {
-    if (!size.width || !size.height) return;
+  function handlePointerDown(e) {
+    dragState.current = {
+      startX: e.clientX,
+      startY: e.clientY,
+      startPan: pan,
+    };
+    e.currentTarget.setPointerCapture(e.pointerId);
+  }
 
-    const ctx = gsap.context(() => {
-      const length = polylineRef.current.getTotalLength();
-      gsap.set(polylineRef.current, {
-        strokeDasharray: length,
-        strokeDashoffset: length,
-      });
+  function handlePointerMove(e) {
+    if (!dragState.current) return;
+    const dx = e.clientX - dragState.current.startX;
+    const dy = e.clientY - dragState.current.startY;
+    const next = {
+      x: dragState.current.startPan.x + dx,
+      y: dragState.current.startPan.y + dy,
+    };
+    setPan(clampPan(next, scale, size));
+  }
 
-      const tl = gsap.timeline({
-        scrollTrigger: { trigger: containerRef.current, start: "top 80%" },
-      });
+  function handlePointerUp() {
+    dragState.current = null;
+  }
 
-      tl.to(polylineRef.current, {
-        strokeDashoffset: 0,
-        duration: 1.8,
-        ease: "power2.inOut",
-      })
-        .from(
-          dotRefs.current,
-          {
-            scale: 0,
-            opacity: 0,
-            duration: 0.35,
-            stagger: 0.22,
-            ease: "back.out(2)",
-          },
-          "<+0.1"
-        )
-        .from(
-          labelRefs.current,
-          {
-            opacity: 0,
-            y: 6,
-            duration: 0.35,
-            stagger: 0.22,
-          },
-          "<+0.05"
-        );
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, [size.width, size.height]);
+  function handleWheel(e) {
+    e.preventDefault();
+    applyScale(scale + (e.deltaY < 0 ? SCALE_STEP / 2 : -SCALE_STEP / 2));
+  }
 
   return (
-    <div ref={containerRef} className="relative mt-8 h-44 sm:h-48">
-      {size.width > 0 && (
-        <svg
-          width={size.width}
-          height={size.height}
-          viewBox={`0 0 ${size.width} ${size.height}`}
-          className="absolute inset-0 overflow-visible"
-        >
-          <polyline
-            ref={polylineRef}
-            points={polylinePoints}
-            fill="none"
-            className="stroke-brand-blue dark:stroke-blue-400"
-            strokeWidth="1.5"
+    <div className="relative mt-8">
+      <div
+        ref={containerRef}
+        className="relative h-[280px] cursor-grab touch-none overflow-hidden rounded-card border border-border bg-slate-50 active:cursor-grabbing dark:border-slate-700 dark:bg-slate-900 sm:h-[380px] lg:h-[460px]"
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerLeave={handlePointerUp}
+        onWheel={handleWheel}
+      >
+        {size.width > 0 && (
+          <img
+            src={userJourneyFull}
+            alt="User journey map tracking actions, thoughts, feelings, pain points, and opportunities across the problem, searching, evaluating, booking, waiting, and service delivery stages"
+            draggable={false}
+            className="pointer-events-none absolute left-1/2 top-1/2 max-w-none select-none"
+            style={{
+              width: getFitSize(size).width * scale,
+              height: getFitSize(size).height * scale,
+              transform: `translate(-50%, -50%) translate(${pan.x}px, ${pan.y}px)`,
+            }}
           />
-        </svg>
-      )}
+        )}
+      </div>
 
-      {points.map((p, i) => (
-        <span
-          key={i}
-          ref={(el) => (dotRefs.current[i] = el)}
-          className="absolute h-2 w-2 rounded-full bg-brand-blue dark:bg-blue-400"
-          style={{
-            left: `${p.x}px`,
-            top: `${p.y}px`,
-            transform: "translate(-50%, -50%)",
-          }}
-        />
-      ))}
-
-      {stages.map((stage, i) => (
-        <span
-          key={stage.name}
-          ref={(el) => (labelRefs.current[i] = el)}
-          className={`absolute whitespace-nowrap text-xs font-medium text-ink dark:text-white ${
-            stage.labelPos === "above" ? "pb-2" : "pt-2"
-          }`}
-          style={{
-            left: `${points[i].x}px`,
-            top: `${points[i].y}px`,
-            transform: `translateX(${
-              i === 0 ? "0%" : i === stages.length - 1 ? "-100%" : "-50%"
-            }) translateY(${stage.labelPos === "above" ? "-100%" : "0"})`,
-          }}
+      <div className="absolute bottom-3 right-3 flex flex-col overflow-hidden rounded-md border border-border bg-white shadow-sm dark:border-slate-700 dark:bg-slate-800">
+        <button
+          type="button"
+          aria-label="Zoom in"
+          onClick={() => applyScale(scale + SCALE_STEP)}
+          className="flex h-9 w-9 items-center justify-center text-lg font-semibold text-ink hover:bg-slate-100 dark:text-white dark:hover:bg-slate-700"
         >
-          {stage.emotion}
-        </span>
-      ))}
+          +
+        </button>
+        <div className="h-px w-full bg-border dark:bg-slate-700" />
+        <button
+          type="button"
+          aria-label="Zoom out"
+          onClick={() => applyScale(scale - SCALE_STEP)}
+          className="flex h-9 w-9 items-center justify-center text-lg font-semibold text-ink hover:bg-slate-100 dark:text-white dark:hover:bg-slate-700"
+        >
+          &minus;
+        </button>
+      </div>
     </div>
   );
 }
 
 export default function UserJourneySection() {
   const headerRef = useRef(null);
-  const mapRef = useRef(null);
+  const viewerRef = useRef(null);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -205,12 +149,12 @@ export default function UserJourneySection() {
         scrollTrigger: { trigger: headerRef.current, start: "top 85%" },
       });
 
-      gsap.from(mapRef.current, {
+      gsap.from(viewerRef.current, {
         opacity: 0,
         y: 24,
         duration: 0.6,
         ease: "power2.out",
-        scrollTrigger: { trigger: mapRef.current, start: "top 85%" },
+        scrollTrigger: { trigger: viewerRef.current, start: "top 85%" },
       });
     });
 
@@ -226,69 +170,13 @@ export default function UserJourneySection() {
             Current User Journey
           </h2>
           <p className="mt-6 max-w-2xl text-secondary-text dark:text-slate-400">
-            Connecting pain points to product opportunities.
+            Connecting pain points to product opportunities. Drag to explore,
+            use the plus and minus buttons to zoom.
           </p>
         </div>
 
-        <div ref={mapRef} className="mt-10">
-          <div className="overflow-x-auto">
-            <div className="min-w-[640px] sm:min-w-0">
-              <div className="grid grid-cols-6 gap-2 sm:gap-3">
-                {stages.map((stage) => (
-                  <p
-                    key={stage.name}
-                    className="text-center text-[9px] font-semibold uppercase tracking-wide text-secondary-text dark:text-slate-400 sm:text-[11px]"
-                  >
-                    {stage.name}
-                  </p>
-                ))}
-              </div>
-
-              <EmotionChart />
-
-              {[
-                { key: "doing", label: "Doing" },
-                { key: "pain", label: "Pain" },
-              ].map((row) => (
-                <div key={row.key} className="mt-8 flex items-stretch gap-3 sm:gap-4">
-                  <span className={rowLabelClass} style={{ writingMode: "vertical-rl" }}>
-                    {row.label}
-                  </span>
-                  <div className="grid flex-1 grid-cols-6 gap-3 sm:gap-4">
-                    {stages.map((stage) => (
-                      <div
-                        key={stage.name}
-                        className="rounded-md border border-border p-3 text-[11px] text-secondary-text dark:border-slate-700 dark:text-slate-400 sm:p-4 sm:text-xs"
-                      >
-                        {stage[row.key]}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="mt-8 flex items-center gap-3 sm:gap-4">
-            <span className={rowLabelClass} style={{ writingMode: "vertical-rl" }}>
-              Opp
-            </span>
-            <div className="flex flex-1 flex-wrap justify-between gap-2">
-              {stages.map((stage) => (
-                <div
-                  key={stage.name}
-                  className="whitespace-nowrap rounded-full bg-brand-blue-tint px-3 py-2 text-[10px] font-medium text-brand-blue dark:bg-blue-500/15 dark:text-blue-300 sm:px-4 sm:text-xs"
-                >
-                  {stage.opp}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <p className="mt-6 text-xs text-secondary-text dark:text-slate-400">
-            Lowest point: the wait, the stage no current alternative
-            addresses.
-          </p>
+        <div ref={viewerRef}>
+          <UserJourneyViewer />
         </div>
       </Container>
     </section>
