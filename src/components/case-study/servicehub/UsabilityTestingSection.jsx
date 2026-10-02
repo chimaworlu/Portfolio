@@ -2,24 +2,21 @@ import { useLayoutEffect, useRef } from "react";
 import { gsap } from "../../../lib/gsap.js";
 import Container from "../../layout/Container.jsx";
 import SectionEyebrow from "../SectionEyebrow.jsx";
-import refiningBefore from "../../../assets/servicehub/flow-refining-before.png";
-import refiningAfter from "../../../assets/servicehub/flow-refining-after.png";
+import usabilityBefore from "../../../assets/servicehub/usability-before.png";
+import usabilityAfter from "../../../assets/servicehub/usability-after.png";
 
 const versions = [
   {
     label: "Before",
-    badgeClass:
-      "bg-slate-200 text-secondary-text dark:bg-slate-700 dark:text-slate-300",
-    src: refiningBefore,
-    alt: "Before: provider cards with distance and rating but no online status",
+    src: usabilityBefore,
+    alt: "Before: provider cards focus on distance and rating only, unclear if a provider is active",
     caption:
       "Distance and rating shown, but no signal of who's actually reachable now.",
   },
   {
     label: "After",
-    badgeClass: "bg-brand-blue text-white",
-    src: refiningAfter,
-    alt: "After: provider cards with a green Online badge",
+    src: usabilityAfter,
+    alt: "After: provider cards with a green Online status badge, clear who's active now",
     caption:
       "Green 'Online' badge added to provider cards, availability visible at a glance.",
   },
@@ -89,18 +86,13 @@ export default function UsabilityTestingSection() {
         >
           {versions.map((version) => (
             <div key={version.label} className="flex flex-col items-center">
-              <span
-                className={`rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wide ${version.badgeClass}`}
-              >
-                {version.label}
-              </span>
               <img
                 src={version.src}
                 alt={version.alt}
                 loading="lazy"
-                className="mt-6 h-auto w-full max-w-[280px]"
+                className="h-auto w-full"
               />
-              <p className="mt-4 max-w-[280px] text-center text-sm text-secondary-text dark:text-slate-400">
+              <p className="mt-4 max-w-sm text-center text-sm text-secondary-text dark:text-slate-400">
                 {version.caption}
               </p>
             </div>

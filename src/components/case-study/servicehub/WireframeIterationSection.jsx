@@ -2,28 +2,7 @@ import { useLayoutEffect, useRef } from "react";
 import { gsap } from "../../../lib/gsap.js";
 import Container from "../../layout/Container.jsx";
 import SectionEyebrow from "../SectionEyebrow.jsx";
-import wireframeBefore from "../../../assets/servicehub/wireframe-before.png";
-import wireframeAfter from "../../../assets/servicehub/wireframe-after.png";
-
-const versions = [
-  {
-    label: "Before",
-    badgeClass:
-      "bg-slate-200 text-secondary-text dark:bg-slate-700 dark:text-slate-300",
-    src: wireframeBefore,
-    alt: "Before: homepage with a horizontal scrolling category strip",
-    caption:
-      "Horizontal category strip forced side-scrolling; availability unclear.",
-  },
-  {
-    label: "After",
-    badgeClass: "bg-brand-blue text-white",
-    src: wireframeAfter,
-    alt: "After: homepage with categories in a single scannable row",
-    caption:
-      "Grid categories scan at a glance; 'Available Now' surfaced to the top.",
-  },
-];
+import wireframeComparison from "../../../assets/servicehub/wireframe-iteration-comparison.png";
 
 export default function WireframeIterationSection() {
   const contentRef = useRef(null);
@@ -74,28 +53,18 @@ export default function WireframeIterationSection() {
           </blockquote>
         </div>
 
-        <div
-          ref={columnsRef}
-          className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2"
-        >
-          {versions.map((version) => (
-            <div key={version.label} className="flex flex-col items-center">
-              <span
-                className={`rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wide ${version.badgeClass}`}
-              >
-                {version.label}
-              </span>
-              <img
-                src={version.src}
-                alt={version.alt}
-                loading="lazy"
-                className="mt-6 h-auto w-full max-w-[280px]"
-              />
-              <p className="mt-4 max-w-[280px] text-center text-sm text-secondary-text dark:text-slate-400">
-                {version.caption}
-              </p>
-            </div>
-          ))}
+        <div ref={columnsRef} className="mt-12 flex flex-col items-center">
+          <img
+            src={wireframeComparison}
+            alt="Before and after: the homepage's horizontal scrolling category strip replaced with a single scannable grid"
+            loading="lazy"
+            className="h-auto w-full max-w-xl"
+          />
+          <p className="mt-6 max-w-xl text-center text-sm text-secondary-text dark:text-slate-400">
+            The horizontal category strip forced side-scrolling and buried
+            availability. A single scannable grid surfaces &ldquo;Available
+            Now&rdquo; and all four categories at a glance.
+          </p>
         </div>
       </Container>
     </section>

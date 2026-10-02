@@ -2,16 +2,16 @@ import { useLayoutEffect, useRef, useState, useCallback } from "react";
 import { gsap } from "../../../lib/gsap.js";
 import Container from "../../layout/Container.jsx";
 import SectionEyebrow from "../SectionEyebrow.jsx";
-import affinityMapFull from "../../../assets/servicehub/affinity-map-full.png";
+import wireframesFull from "../../../assets/servicehub/wireframes-full.png";
 
-const AFFINITY_ASPECT = 4504 / 3401;
+const WIREFRAMES_ASPECT = 5600 / 6128;
 const MIN_SCALE = 0.6;
 const MAX_SCALE = 3;
 const SCALE_STEP = 0.4;
 
 function getFitSize(size) {
   if (!size.width) return { width: 0, height: 0 };
-  return { width: size.width, height: size.width / AFFINITY_ASPECT };
+  return { width: size.width, height: size.width / WIREFRAMES_ASPECT };
 }
 
 function clampPan(pan, scale, size) {
@@ -27,7 +27,7 @@ function clampPan(pan, scale, size) {
   };
 }
 
-function AffinityMapViewer() {
+function WireframesViewer() {
   const containerRef = useRef(null);
   const [size, setSize] = useState({ width: 0, height: 0 });
   const [scale, setScale] = useState(1);
@@ -89,7 +89,7 @@ function AffinityMapViewer() {
     <div className="relative mt-8">
       <div
         ref={containerRef}
-        className="relative h-[280px] cursor-grab touch-none overflow-hidden rounded-card border border-border bg-slate-50 active:cursor-grabbing dark:border-slate-700 dark:bg-slate-900 sm:h-[380px] lg:h-[460px]"
+        className="relative h-[280px] cursor-grab touch-none overflow-hidden rounded-card border border-border bg-white active:cursor-grabbing dark:border-slate-700 sm:h-[380px] lg:h-[460px]"
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
@@ -98,8 +98,8 @@ function AffinityMapViewer() {
       >
         {size.width > 0 && (
           <img
-            src={affinityMapFull}
-            alt="Affinity map grouping research insights into Trust & Confidence, Speed & Availability, Discovery & Access, and Reviews & Social Proof"
+            src={wireframesFull}
+            alt="Initial low-fidelity wireframes: homepage, search results, provider profile, and leave a review screens"
             draggable={false}
             className="pointer-events-none absolute left-1/2 top-1/2 max-w-none select-none"
             style={{
@@ -134,7 +134,7 @@ function AffinityMapViewer() {
   );
 }
 
-export default function ResearchMethodsSection() {
+export default function WireframesSection() {
   const headerRef = useRef(null);
   const viewerRef = useRef(null);
 
@@ -165,20 +165,19 @@ export default function ResearchMethodsSection() {
     <section className="mt-20 scroll-mt-20 sm:mt-section">
       <Container>
         <div ref={headerRef}>
-          <SectionEyebrow color="#2563EB">Affinity Map</SectionEyebrow>
+          <SectionEyebrow color="#2563EB">Design</SectionEyebrow>
           <h2 className="mt-2 font-display text-2xl text-ink dark:text-white sm:text-3xl">
-            Research Methods
+            Initial Wireframes
           </h2>
           <p className="mt-6 max-w-2xl text-secondary-text dark:text-slate-400">
-            After collecting all survey responses and interview transcripts,
-            I organized every insight using affinity mapping to identify
-            patterns and recurring themes across user feedback. Drag to
-            explore, use the plus and minus buttons to zoom.
+            Low-fidelity screens for the core flow, from homepage to leaving
+            a review. Drag to explore, use the plus and minus buttons to
+            zoom.
           </p>
         </div>
 
         <div ref={viewerRef}>
-          <AffinityMapViewer />
+          <WireframesViewer />
         </div>
       </Container>
     </section>
