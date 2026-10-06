@@ -4,8 +4,11 @@ import ProjectGrid from "../components/home/ProjectGrid.jsx";
 import Experience from "../components/home/Experience.jsx";
 import About from "../components/home/About.jsx";
 import Contact from "../components/home/Contact.jsx";
+import { usePageMeta } from "../hooks/usePageMeta.js";
 
 export default function HomePage() {
+  usePageMeta("/");
+
   return (
     <div className="bg-[#FAFAF7] dark:bg-ink">
       <Nav variant="home" />
