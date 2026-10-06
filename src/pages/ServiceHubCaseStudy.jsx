@@ -18,8 +18,11 @@ import FinalProductSection from "../components/case-study/servicehub/FinalProduc
 import UsabilityTestingSection from "../components/case-study/servicehub/UsabilityTestingSection.jsx";
 import LessonsLearnedSection from "../components/case-study/servicehub/LessonsLearnedSection.jsx";
 import ServiceHubFooter from "../components/case-study/servicehub/ServiceHubFooter.jsx";
+import { usePageMeta } from "../hooks/usePageMeta.js";
 
 export default function ServiceHubCaseStudy() {
+  usePageMeta("/work/servicehub");
+
   return (
     <div className="bg-[#FAFAF7] dark:bg-ink">
       <Nav variant="case-study" />

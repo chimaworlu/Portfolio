@@ -29,39 +29,62 @@ const insights = [
 ];
 
 function PercentagePill({ percent }) {
-  const pillRef = useRef(null);
-  const fillRef = useRef(null);
-  const numberRef = useRef(null);
+  const containerRef = useRef(null);
+  const mobileNumberRef = useRef(null);
+  const mobileFillRef = useRef(null);
+  const desktopNumberRef = useRef(null);
+  const desktopFillRef = useRef(null);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      animateCountUp(pillRef.current, percent, {
+      animateCountUp(containerRef.current, percent, {
         onUpdate: (val) => {
-          if (numberRef.current) numberRef.current.textContent = `${val}%`;
-          if (fillRef.current) fillRef.current.style.height = `${val}%`;
+          if (mobileNumberRef.current) mobileNumberRef.current.textContent = `${val}%`;
+          if (mobileFillRef.current) mobileFillRef.current.style.width = `${val}%`;
+          if (desktopNumberRef.current) desktopNumberRef.current.textContent = `${val}%`;
+          if (desktopFillRef.current) desktopFillRef.current.style.height = `${val}%`;
         },
       });
-    }, pillRef);
+    }, containerRef);
 
     return () => ctx.revert();
   }, [percent]);
 
   return (
-    <div
-      ref={pillRef}
-      className="relative h-32 w-16 flex-shrink-0 overflow-hidden rounded-full bg-brand-blue-tint dark:bg-slate-800"
-    >
-      <div
-        ref={fillRef}
-        className="absolute inset-x-0 bottom-0 bg-brand-blue"
-        style={{ height: "0%" }}
-      />
-      <span
-        ref={numberRef}
-        className="absolute inset-x-0 bottom-3 text-center text-sm font-bold text-white"
-      >
-        0%
-      </span>
+    <div ref={containerRef} className="flex-shrink-0">
+      {/* Mobile: horizontal bar, number beside it, fills left to right */}
+      <div className="flex max-w-xl items-center gap-4 sm:hidden">
+        <span
+          ref={mobileNumberRef}
+          className="w-14 flex-shrink-0 text-xl font-bold text-ink dark:text-white"
+        >
+          0%
+        </span>
+        <div className="relative h-4 flex-1 overflow-hidden rounded-full bg-brand-blue-tint dark:bg-slate-800">
+          <div
+            ref={mobileFillRef}
+            className="absolute inset-y-0 left-0 rounded-full bg-brand-blue"
+            style={{ width: "0%" }}
+          />
+        </div>
+      </div>
+
+      {/* Desktop: vertical pill, number above it, fills bottom to top */}
+      <div className="hidden flex-col items-center gap-3 sm:flex">
+        <span
+          ref={desktopNumberRef}
+          className="text-xl font-bold text-ink dark:text-white"
+        >
+          0%
+        </span>
+        <div className="relative h-20 w-16 overflow-hidden rounded-full bg-brand-blue-tint dark:bg-slate-800">
+          <div
+            ref={desktopFillRef}
+            className="absolute inset-x-0 bottom-0 bg-brand-blue"
+            style={{ height: "0%" }}
+          />
+        </div>
+      </div>
     </div>
   );
 }
@@ -85,16 +108,21 @@ function InsightRow({ item }) {
   }, []);
 
   return (
-    <div ref={rowRef} className="mt-10 flex items-start gap-6">
-      <div data-reveal>
+    <div
+      ref={rowRef}
+      className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-6"
+    >
+      <div data-reveal className="sm:flex-shrink-0">
         <PercentagePill percent={item.percent} />
       </div>
       <div data-reveal className="max-w-xl">
         <p className="text-ink dark:text-white">
           <span className="font-semibold">Insight:</span> {item.insight}
         </p>
-        <p className="mt-3 rounded-md bg-brand-blue-tint px-4 py-3 text-sm text-brand-blue dark:bg-blue-500/10 dark:text-blue-300">
-          <span className="font-semibold">Design Implication:</span>{" "}
+        <p className="mt-3 rounded-md bg-brand-blue-tint px-4 py-3 text-sm text-ink dark:bg-blue-500/10 dark:text-white">
+          <span className="font-semibold text-brand-blue dark:text-blue-300">
+            Design Implication:
+          </span>{" "}
           {item.implication}
         </p>
       </div>

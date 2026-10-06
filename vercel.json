@@ -1,5 +1,8 @@
 {
   "rewrites": [
+    { "source": "/work/uxlens-ai", "destination": "/work/uxlens-ai/index.html" },
+    { "source": "/work/legible", "destination": "/work/legible/index.html" },
+    { "source": "/work/servicehub", "destination": "/work/servicehub/index.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
