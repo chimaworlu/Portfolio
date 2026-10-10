@@ -5,9 +5,7 @@ const ThemeContext = createContext(null);
 function getInitialTheme() {
   const saved = localStorage.getItem("theme");
   if (saved === "dark" || saved === "light") return saved;
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
+  return "light";
 }
 
 export function ThemeProvider({ children }) {
@@ -16,20 +14,6 @@ export function ThemeProvider({ children }) {
   useEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");
   }, [theme]);
-
-  // First-ever visit (no manual choice saved yet): keep following the
-  // system preference live until the user makes an explicit choice.
-  useEffect(() => {
-    if (localStorage.getItem("theme")) return;
-
-    const media = window.matchMedia("(prefers-color-scheme: dark)");
-    function handleChange(event) {
-      setTheme(event.matches ? "dark" : "light");
-    }
-
-    media.addEventListener("change", handleChange);
-    return () => media.removeEventListener("change", handleChange);
-  }, []);
 
   function setThemeAndPersist(nextTheme) {
     localStorage.setItem("theme", nextTheme);
