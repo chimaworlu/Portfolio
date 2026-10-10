@@ -14,6 +14,8 @@ export default function CaseStudyPage({ slug }) {
   }
 
   const nextProject = getNextProject(slug);
+  const liveUrl =
+    project.link && project.link.href !== "#" ? project.link.href : null;
 
   return (
     <div className="bg-[#FAFAF7] dark:bg-ink">
@@ -21,6 +23,7 @@ export default function CaseStudyPage({ slug }) {
       <CaseStudyTemplate
         projectName={project.name}
         cardColor={project.cardColor}
+        liveUrl={liveUrl}
         positioning={project.positioning}
         role={project.role}
         timeline={project.timeline}

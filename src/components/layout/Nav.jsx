@@ -48,6 +48,9 @@ const homeLinks = [
   { label: "Contact", href: "#contact" },
 ];
 
+// TODO: replace with the real resume URL once provided.
+const RESUME_URL = "#";
+
 const linkClass =
   "font-sans text-sm font-medium tracking-wide text-ink dark:text-white";
 
@@ -122,6 +125,14 @@ export default function Nav({ variant = "home" }) {
               </Link>
             )
           )}
+          <a
+            href={RESUME_URL}
+            target="_blank"
+            rel="noreferrer"
+            className={`${linkClass} transition-colors duration-200 hover:text-secondary-text dark:hover:text-slate-400`}
+          >
+            Resume
+          </a>
         </nav>
 
         <div className="flex items-center gap-3 md:hidden">
@@ -196,6 +207,15 @@ export default function Nav({ variant = "home" }) {
                 </Link>
               )
             )}
+            <a
+              href={RESUME_URL}
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => setMenuOpen(false)}
+              className="font-sans text-2xl font-medium tracking-wide text-ink transition-colors duration-200 hover:text-secondary-text dark:text-white dark:hover:text-slate-400"
+            >
+              Resume
+            </a>
           </nav>
 
           <div className="mt-8 h-px w-full bg-border dark:bg-slate-700" />

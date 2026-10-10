@@ -22,7 +22,7 @@ export const projects = [
     gridImage: uxlensGridImage,
     cardColor: "#3457D5",
     projectType: "Full-Stack AI Product",
-    link: { label: "View Live", href: "#" },
+    link: { label: "View Live", href: "https://uxlens-ai-beta.vercel.app/" },
     positioning:
       "AI-powered research synthesis, every insight traceable back to its source.",
     role: "Design to MVP, end to end",

@@ -18,6 +18,7 @@ const placeholderToolGroups = [
 export default function CaseStudyTemplate({
   projectName,
   cardColor,
+  liveUrl,
   positioning,
   role,
   timeline,
@@ -62,25 +63,48 @@ export default function CaseStudyTemplate({
       <Container className="pt-10">
         {/* Opener */}
         <div className="relative flex h-[420px] items-center justify-center rounded-card bg-slate-50 dark:bg-slate-800">
-          <span
-            style={{ color: cardColor, backgroundColor: `${cardColor}1A` }}
-            className="absolute right-6 top-6 inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium"
-          >
-            View Live
-            <svg
-              width="13"
-              height="13"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M7 17L17 7M8 7h9v9" />
-            </svg>
-          </span>
+          {(() => {
+            const badgeClass =
+              "absolute right-6 top-6 inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium";
+            const badgeStyle = {
+              color: cardColor,
+              backgroundColor: `${cardColor}1A`,
+            };
+            const badgeContent = (
+              <>
+                View Live
+                <svg
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M7 17L17 7M8 7h9v9" />
+                </svg>
+              </>
+            );
+
+            return liveUrl ? (
+              <a
+                href={liveUrl}
+                target="_blank"
+                rel="noreferrer"
+                style={badgeStyle}
+                className={`${badgeClass} transition-opacity hover:opacity-80`}
+              >
+                {badgeContent}
+              </a>
+            ) : (
+              <span style={badgeStyle} className={badgeClass}>
+                {badgeContent}
+              </span>
+            );
+          })()}
           <span className="text-sm text-secondary-text dark:text-slate-400">[OPENER VIDEO]</span>
         </div>
       </Container>

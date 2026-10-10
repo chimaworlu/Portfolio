@@ -55,11 +55,9 @@
     <script>
       (function () {
         try {
-          var saved = localStorage.getItem("theme");
-          var isDark = saved
-            ? saved === "dark"
-            : window.matchMedia("(prefers-color-scheme: dark)").matches;
-          if (isDark) document.documentElement.classList.add("dark");
+          if (localStorage.getItem("theme") === "dark") {
+            document.documentElement.classList.add("dark");
+          }
         } catch (e) {}
       })();
     </script>
