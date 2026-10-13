@@ -10,7 +10,7 @@ const experience = [
   },
   {
     company: "Squama Marketing",
-    role: "UX/UI Designer (Freelance)",
+    role: "Product Designer (Freelance)",
     dates: "March 2026 - Present",
   },
 ];
