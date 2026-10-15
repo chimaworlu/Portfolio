@@ -100,7 +100,7 @@ export const projects = [
     gridImage: legibleGridImage,
     cardColor: "#00B407",
     projectType: "Full-Stack AI Product",
-    link: { label: "View Live", href: "#" },
+    link: { label: "View Live", href: "https://legible-six.vercel.app/" },
     positioning:
       "Turns messy handwritten notes into a clean digital book you can actually read.",
     role: "Design to MVP, end to end",
