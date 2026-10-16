@@ -24,6 +24,9 @@ export default function CaseStudyPage({ slug }) {
         projectName={project.name}
         cardColor={project.cardColor}
         liveUrl={liveUrl}
+        openerVideoId={project.openerVideoId}
+        openerImage={project.openerImage}
+        openerClickThrough={project.openerClickThrough}
         positioning={project.positioning}
         role={project.role}
         timeline={project.timeline}

@@ -6,6 +6,7 @@ import uxlensScreenInsights from "../assets/uxlens-ai/screen-insights.png";
 import uxlensScreenChat from "../assets/uxlens-ai/screen-chat.png";
 import uxlensGridImage from "../assets/projects-grid/uxlens-ai.png";
 import legibleGridImage from "../assets/projects-grid/legible.png";
+import legibleOpenerImage from "../assets/legible/opener.png";
 import servicehubGridImage from "../assets/projects-grid/servicehub.png";
 
 const SERVICEHUB_FIGMA_URL =
@@ -23,6 +24,8 @@ export const projects = [
     cardColor: "#3457D5",
     projectType: "Full-Stack AI Product",
     link: { label: "View Live", href: "https://uxlens-ai-beta.vercel.app/" },
+    openerVideoId: "0a_qvEKP94Y",
+    openerClickThrough: true,
     positioning:
       "AI-powered research synthesis, every insight traceable back to its source.",
     role: "Design to MVP, end to end",
@@ -100,7 +103,9 @@ export const projects = [
     gridImage: legibleGridImage,
     cardColor: "#00B407",
     projectType: "Full-Stack AI Product",
-    link: { label: "View Live", href: "#" },
+    link: { label: "View Live", href: "https://legible-six.vercel.app/" },
+    openerImage: legibleOpenerImage,
+    openerClickThrough: true,
     positioning:
       "Turns messy handwritten notes into a clean digital book you can actually read.",
     role: "Design to MVP, end to end",

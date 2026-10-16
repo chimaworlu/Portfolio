@@ -15,10 +15,56 @@ const placeholderToolGroups = [
   { label: "AI Assisted Workflow", tools: ["[TOOL]", "[TOOL]", "[TOOL]"] },
 ];
 
+function LiveBadge({ liveUrl, cardColor }) {
+  const badgeClass =
+    "absolute right-6 top-6 z-10 inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium";
+  const badgeStyle = {
+    color: cardColor,
+    backgroundColor: `${cardColor}1A`,
+  };
+  const badgeContent = (
+    <>
+      View Live
+      <svg
+        width="13"
+        height="13"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M7 17L17 7M8 7h9v9" />
+      </svg>
+    </>
+  );
+
+  return liveUrl ? (
+    <a
+      href={liveUrl}
+      target="_blank"
+      rel="noreferrer"
+      style={badgeStyle}
+      className={`${badgeClass} transition-opacity hover:opacity-80`}
+    >
+      {badgeContent}
+    </a>
+  ) : (
+    <span style={badgeStyle} className={badgeClass}>
+      {badgeContent}
+    </span>
+  );
+}
+
 export default function CaseStudyTemplate({
   projectName,
   cardColor,
   liveUrl,
+  openerVideoId,
+  openerImage,
+  openerClickThrough,
   positioning,
   role,
   timeline,
@@ -62,50 +108,40 @@ export default function CaseStudyTemplate({
     <main ref={mainRef} className="pt-20">
       <Container className="pt-10">
         {/* Opener */}
-        <div className="relative flex h-[420px] items-center justify-center rounded-card bg-slate-50 dark:bg-slate-800">
-          {(() => {
-            const badgeClass =
-              "absolute right-6 top-6 inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium";
-            const badgeStyle = {
-              color: cardColor,
-              backgroundColor: `${cardColor}1A`,
-            };
-            const badgeContent = (
-              <>
-                View Live
-                <svg
-                  width="13"
-                  height="13"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M7 17L17 7M8 7h9v9" />
-                </svg>
-              </>
-            );
+        <div
+          className={`relative flex items-center justify-center overflow-hidden rounded-card bg-slate-50 dark:bg-slate-800 ${
+            openerVideoId || openerImage ? "aspect-video w-full" : "h-[420px]"
+          }`}
+        >
+          {openerVideoId ? (
+            <iframe
+              src={`https://www.youtube.com/embed/${openerVideoId}?autoplay=1&mute=1&loop=1&controls=0&playlist=${openerVideoId}&modestbranding=1&playsinline=1`}
+              title={`${projectName} product demo`}
+              className="pointer-events-none absolute left-1/2 top-1/2 h-[101%] w-[101%] -translate-x-1/2 -translate-y-1/2"
+              allow="autoplay; encrypted-media"
+              frameBorder="0"
+            />
+          ) : openerImage ? (
+            <img
+              src={openerImage}
+              alt={`${projectName} product screenshot`}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          ) : (
+            <span className="text-sm text-secondary-text dark:text-slate-400">[OPENER VIDEO]</span>
+          )}
 
-            return liveUrl ? (
-              <a
-                href={liveUrl}
-                target="_blank"
-                rel="noreferrer"
-                style={badgeStyle}
-                className={`${badgeClass} transition-opacity hover:opacity-80`}
-              >
-                {badgeContent}
-              </a>
-            ) : (
-              <span style={badgeStyle} className={badgeClass}>
-                {badgeContent}
-              </span>
-            );
-          })()}
-          <span className="text-sm text-secondary-text dark:text-slate-400">[OPENER VIDEO]</span>
+          {(openerVideoId || openerImage) && openerClickThrough && liveUrl ? (
+            <a
+              href={liveUrl}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`View ${projectName} live`}
+              className="absolute inset-0 z-10"
+            />
+          ) : (
+            <LiveBadge liveUrl={liveUrl} cardColor={cardColor} />
+          )}
         </div>
       </Container>
 
