@@ -1,7 +1,4 @@
-// Production domain is not registered yet. Swap this one constant once it
-// is, everything else (canonical URLs, Open Graph, Twitter, sitemap,
-// robots.txt) derives from it.
-export const SITE_URL = "https://REPLACE-WITH-DOMAIN.example";
+export const SITE_URL = "https://chimaworlu.xyz";
 
 export const SITE_NAME = "Chima Worlu";
 export const POSITIONING_LINE =
