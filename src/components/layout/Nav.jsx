@@ -48,8 +48,8 @@ const homeLinks = [
   { label: "Contact", href: "#contact" },
 ];
 
-// TODO: replace with the real resume URL once provided.
-const RESUME_URL = "#";
+const RESUME_URL =
+  "https://docs.google.com/document/d/1etU_A6knKjkZGXsWI2HFFpYcm3Nf-84smnIE2PXZSzE/edit?usp=sharing";
 
 const linkClass =
   "font-sans text-sm font-medium tracking-wide text-ink dark:text-white";
